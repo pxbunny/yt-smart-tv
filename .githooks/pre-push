@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+echo "🚀 Running pre-push hook 🚀"
+
+if [ -z "$(git log --branches --not --remotes)" ]; then
+  echo "🚫 No local commits found, skipping the pre-push hook 🚫"
+  exit 0
+fi
+
+echo -e "\n🔨 Building project..."
+
+npm run build
+
+echo -e "\n🎉 Pre-push status: success 🎉\n"
