@@ -2,7 +2,11 @@
   "name": "YouTube Smart TV",
   "version": "0.1.0",
   "homepage_url": "https://github.com/dae-ne/yt-smart-tv",
-  "permissions": ["declarativeNetRequest", "tabs"],
+  "permissions": [
+    "declarativeNetRequest",
+    "scripting",
+    "tabs"
+  ],
   "host_permissions": ["https://*.youtube.com/*"],
   "background": {
     "service_worker": "background.js",

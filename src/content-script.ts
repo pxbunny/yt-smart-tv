@@ -1,6 +1,6 @@
 import SmartTvButton from 'components/smart-tv-button.svelte';
 
-const sendSignal = () => chrome.runtime.sendMessage({ signal: 'smart-tv' });
+const sendSignal = () => chrome.runtime.sendMessage('open-smart-tv');
 
 const addSmartTvButton = () => {
     const buttonId = 'smart-tv-button';
@@ -10,11 +10,11 @@ const addSmartTvButton = () => {
     const target = document.querySelector('#items.ytd-guide-section-renderer');
     const anchor = document.querySelector('#items > ytd-guide-collapsible-section-entry-renderer');
 
-    if (!target || !anchor) return false;
+    if (!target) return false;
 
     new SmartTvButton({
         target,
-        anchor,
+        anchor: anchor ?? undefined,
         props: {
             id: buttonId,
             onClick: sendSignal

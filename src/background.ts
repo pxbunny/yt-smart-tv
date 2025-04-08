@@ -1,10 +1,23 @@
 import { getUserAgentUpdateRuleOptions } from 'dynamic-rules';
+import { handleExitButton } from 'exit-handler';
 
-const openSmartTvWindow = () => {
-    chrome.windows.create({
+const openSmartTvWindow = async () => {
+    const smartTvWindow = await chrome.windows.create({
         url: 'https://www.youtube.com/tv',
-        type: 'popup',
-        state: 'fullscreen'
+        state: 'fullscreen',
+        focused: true
+    });
+
+    if (!smartTvWindow?.tabs) return;
+
+    const tabId = smartTvWindow.tabs[0].id;
+
+    if (!tabId) return;
+
+    chrome.scripting.executeScript({
+        target: { tabId },
+        injectImmediately: true,
+        func: handleExitButton
     });
 };
 
@@ -12,11 +25,16 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.declarativeNetRequest.updateDynamicRules(getUserAgentUpdateRuleOptions());
 });
 
-chrome.runtime.onMessage.addListener(request => {
-    if (request.signal !== 'smart-tv') return;
-    openSmartTvWindow();
+chrome.runtime.onMessage.addListener(async (request, sender) => {
+    if (request === 'open-smart-tv') {
+        await openSmartTvWindow();
+    }
+
+    if (request === 'exit-smart-tv') {
+        sender.tab?.id && chrome.tabs.remove(sender.tab.id);
+    }
 });
 
-chrome.action.onClicked.addListener(() => {
-    openSmartTvWindow();
+chrome.action.onClicked.addListener(async () => {
+    await openSmartTvWindow();
 });
