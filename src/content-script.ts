@@ -55,7 +55,10 @@ const addSmartTvMiniButton = (observeTargetMutations = true) => {
     return true;
 };
 
-const setButton = (callback: () => boolean, delay = 200) => {
+const setButton = (
+    callback: typeof addSmartTvButton | typeof addSmartTvMiniButton,
+    delay = 200
+) => {
     const interval = setInterval(() => {
         if (callback()) clearInterval(interval);
     }, delay);
