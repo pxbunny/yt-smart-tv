@@ -7,12 +7,12 @@
 
 <div
   id={id}
-  class={mini ? 'ytd-mini-guide-renderer' : 'yte-guide-entry-container ytd-guide-section-renderer'}
+  class={mini ? 'ytd-mini-guide-renderer' : 'container ytd-guide-section-renderer'}
 >
   <button
     id="endpoint"
     on:click={onClick}
-    class={`yt-simple-endpoint ${mini ? 'yte-mini-guide-entry ytd-mini-guide-entry-renderer' : 'yte-guide-entry ytd-guide-entry-renderer'}`}
+    class={`yt-simple-endpoint ${mini ? 'smart-tv-mini-button ytd-mini-guide-entry-renderer' : 'smart-tv-button ytd-guide-entry-renderer'}`}
   >
     <div
       class={`guide-icon ${mini ? 'ytd-mini-guide-entry-renderer' : 'ytd-guide-entry-renderer'}`}
@@ -28,7 +28,7 @@
 </div>
 
 <style>
-  .yte-guide-entry-container {
+  .container {
     width: calc(100% - 12px);
   }
 
@@ -42,7 +42,7 @@
     width: 100%;
   }
 
-  .yte-guide-entry {
+  .smart-tv-button {
     padding: 0 12px;
 
     & .title {
@@ -50,7 +50,7 @@
     }
   }
 
-  .yte-mini-guide-entry {
+  .smart-tv-mini-button {
     padding: 16px 0 14px;
     outline: 0;
     display: flex;
