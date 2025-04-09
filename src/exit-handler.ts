@@ -1,4 +1,4 @@
-export const handleExitButton = () => {
+export const handleTvModeExit = () => {
     const observer = new MutationObserver(mutations => {
         const nodesAdded = mutations.reduce((acc, m) => acc + m.addedNodes.length, 0);
 

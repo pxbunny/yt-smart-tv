@@ -1,5 +1,5 @@
 import { getUserAgentUpdateRuleOptions } from 'dynamic-rules';
-import { handleExitButton } from 'exit-handler';
+import { handleTvModeExit } from 'exit-handler';
 
 const openSmartTv = async () => {
     const smartTvWindow = await chrome.windows.create({
@@ -11,7 +11,7 @@ const openSmartTv = async () => {
     chrome.scripting.executeScript({
         target: { tabId: smartTvWindow.tabs![0].id! },
         injectImmediately: true,
-        func: handleExitButton
+        func: handleTvModeExit
     });
 };
 
