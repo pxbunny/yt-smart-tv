@@ -1,6 +1,10 @@
 import SmartTvButton from 'components/smart-tv-button.svelte';
+import SmartTvPlayerButton from 'components/smart-tv-player-button.svelte';
 
-const sendSignal = () => chrome.runtime.sendMessage('open-smart-tv');
+const sendSignal = (samePage: boolean = false) => {
+    const message = samePage ? 'open-smart-tv-with-uri' : 'open-smart-tv';
+    chrome.runtime.sendMessage(message);
+};
 
 const addSmartTvButton = () => {
     const buttonId = 'smart-tv-button';
@@ -55,6 +59,26 @@ const addSmartTvMiniButton = (observeTargetMutations = true) => {
     return true;
 };
 
+const setSmartTvPlayerButton = () => {
+    const buttonId = 'smart-tv-player-button';
+
+    if (document.getElementById(buttonId)) return true;
+
+    const target = document.querySelector('.ytp-right-controls');
+    const anchor = document.querySelector('.ytp-miniplayer-button');
+
+    if (!target) return false;
+
+    new SmartTvPlayerButton({
+        target,
+        anchor: anchor ?? undefined,
+        props: {
+            id: buttonId,
+            onClick: () => sendSignal(true)
+        }
+    });
+};
+
 const setButton = (
     callback: typeof addSmartTvButton | typeof addSmartTvMiniButton,
     delay = 200
@@ -66,3 +90,9 @@ const setButton = (
 
 setButton(addSmartTvButton);
 setButton(addSmartTvMiniButton);
+
+chrome.runtime.onMessage.addListener(request => {
+    if (request === 'set-smart-tv-player-button') {
+        setSmartTvPlayerButton();
+    }
+});

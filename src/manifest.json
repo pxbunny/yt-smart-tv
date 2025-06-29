@@ -1,7 +1,7 @@
 {
   "name": "YouTube Smart TV",
   "version": "0.1.0",
-  "homepage_url": "https://github.com/dae-ne/yt-smart-tv",
+  "homepage_url": "https://github.com/rczaka/yt-smart-tv",
   "permissions": [
     "declarativeNetRequest",
     "scripting",
