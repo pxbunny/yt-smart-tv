@@ -69,12 +69,18 @@ const setSmartTvPlayerButton = () => {
 
     if (!target) return false;
 
+    const handleClick = () => {
+        const video = document.querySelector('video');
+        video?.pause();
+        sendSignal(true);
+    };
+
     new SmartTvPlayerButton({
         target,
         anchor: anchor ?? undefined,
         props: {
             id: buttonId,
-            onClick: () => sendSignal(true)
+            onClick: handleClick
         }
     });
 };
