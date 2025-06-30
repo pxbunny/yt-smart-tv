@@ -10,7 +10,7 @@
 <button
   id={id}
   class="ytp-button"
-  data-tooltip-target-id="smart-tv-button"
+  data-tooltip-target-id={id}
   data-title-no-tooltip={title}
   aria-label={title}
   title={title}
