@@ -71,7 +71,14 @@ const addSmartTvPlayerButton = (): boolean => {
 
     const handleClick = () => {
         const video = document.querySelector('video');
+
         video?.pause();
+
+        const currentTime = video?.currentTime ?? 0;
+        const url = new URL(window.location.href);
+        url.searchParams.set('t', Math.floor(currentTime).toString());
+        history.replaceState(null, '', url.href);
+
         sendSignal(true);
     };
 
