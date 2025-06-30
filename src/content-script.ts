@@ -90,7 +90,7 @@ const addSmartTvPlayerButton = (): boolean => {
 const setButton = (
     callback: typeof addSmartTvButton | typeof addSmartTvMiniButton,
     delay = 200
-) => {
+): void => {
     const interval = setInterval(() => {
         if (callback()) clearInterval(interval);
     }, delay);

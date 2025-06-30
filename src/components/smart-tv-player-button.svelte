@@ -1,18 +1,20 @@
 <script lang="ts">
-  import IoTvOutlineIcon from './io-tv-outline-icon.svelte';
+  import TvPlayerIcon from './tv-player-icon.svelte';
 
   export let id: string | undefined = undefined;
   export let onClick: (() => void) | undefined = undefined;
+
+  const title = 'Smart TV';
 </script>
 
 <button
   id={id}
   class="ytp-button"
-  on:click={onClick}
   data-tooltip-target-id="smart-tv-button"
-  data-title-no-tooltip="Smart TV"
-  aria-label="Smart TV"
-  title="Smart TV"
+  data-title-no-tooltip={title}
+  aria-label={title}
+  title={title}
+  on:click={onClick}
 >
-  <IoTvOutlineIcon width="24" height="24" />
+  <TvPlayerIcon />
 </button>
