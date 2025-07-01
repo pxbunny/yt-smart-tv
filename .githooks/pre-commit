@@ -5,6 +5,6 @@ set -e
 echo "🚀 Running pre-commit hook 🚀"
 
 echo -e "\n🔍 Running formaters and linters"
-# npm run lint-staged
+npm run lint-staged
 
 echo -e "\n🎉 Pre-commit status: success 🎉\n"

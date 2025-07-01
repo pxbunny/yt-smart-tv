@@ -3,7 +3,7 @@ import requests from 'requests';
 
 const BASE_URL = 'https://www.youtube.com';
 
-const openSmartTv = async (uri: string = '', incognito = false) => {
+const openSmartTv = async (uri = '', incognito = false) => {
     await chrome.windows.create({
         url: `${BASE_URL}/tv` + uri,
         state: 'fullscreen',

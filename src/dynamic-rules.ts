@@ -1,7 +1,7 @@
 import agents from './user-agents.json';
 import DNR = chrome.declarativeNetRequest;
 
-export const getUserAgentUpdateRuleOptions = (id: number = 1): DNR.UpdateRuleOptions => ({
+export const getUserAgentUpdateRuleOptions = (id = 1): DNR.UpdateRuleOptions => ({
     removeRuleIds: [id],
     addRules: [
         {
