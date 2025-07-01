@@ -3,11 +3,12 @@ import requests from 'requests';
 
 const BASE_URL = 'https://www.youtube.com';
 
-const openSmartTv = async (uri?: string) => {
+const openSmartTv = async (uri?: string = '', incognito = false) => {
     await chrome.windows.create({
         url: `${BASE_URL}/tv` + uri,
         state: 'fullscreen',
-        focused: true
+        focused: true,
+        incognito
     });
 
     // chrome.scripting.executeScript({
@@ -35,13 +36,15 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 chrome.runtime.onMessage.addListener(async (request, sender) => {
+    const isIncognito = sender.tab?.incognito ?? false;
+
     if (request === requests.OPEN_SMART_TV) {
-        await openSmartTv();
+        await openSmartTv('', isIncognito);
     }
 
     if (request === requests.OPEN_SMART_TV_WITH_URI) {
         const uri = sender.tab?.url?.replace(BASE_URL, '');
-        await openSmartTv(uri);
+        await openSmartTv(uri, isIncognito);
     }
 
     // if (request === 'exit-smart-tv') {
