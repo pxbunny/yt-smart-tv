@@ -1,10 +1,8 @@
 import SmartTvButton from 'components/smart-tv-button.svelte';
 import SmartTvPlayerButton from 'components/smart-tv-player-button.svelte';
+import requests from 'requests';
 
-const sendSignal = (samePage: boolean = false): void => {
-    const message = samePage ? 'open-smart-tv-with-uri' : 'open-smart-tv';
-    chrome.runtime.sendMessage(message);
-};
+const { sendMessage, onMessage } = chrome.runtime;
 
 const addSmartTvButton = (): boolean => {
     const buttonId = 'smart-tv-button';
@@ -21,7 +19,7 @@ const addSmartTvButton = (): boolean => {
         anchor: anchor ?? undefined,
         props: {
             id: buttonId,
-            onClick: sendSignal
+            onClick: () => sendMessage(requests.OPEN_SMART_TV)
         }
     });
 
@@ -52,14 +50,14 @@ const addSmartTvMiniButton = (observeTargetMutations = true): boolean => {
         props: {
             id: buttonId,
             mini: true,
-            onClick: sendSignal
+            onClick: () => sendMessage(requests.OPEN_SMART_TV)
         }
     });
 
     return true;
 };
 
-const addSmartTvPlayerButton = (): boolean => {
+const setSmartTvPlayerButton = (): boolean => {
     const buttonId = 'smart-tv-player-button';
 
     if (document.getElementById(buttonId)) return true;
@@ -79,7 +77,7 @@ const addSmartTvPlayerButton = (): boolean => {
         url.searchParams.set('t', Math.floor(currentTime).toString());
         history.replaceState(null, '', url.href);
 
-        sendSignal(true);
+        sendMessage(requests.OPEN_SMART_TV_WITH_URI);
     };
 
     new SmartTvPlayerButton({
@@ -106,8 +104,8 @@ const handleRetries = (
 handleRetries(addSmartTvButton);
 handleRetries(addSmartTvMiniButton);
 
-chrome.runtime.onMessage.addListener(request => {
-    if (request === 'set-smart-tv-player-button') {
-        handleRetries(addSmartTvPlayerButton);
+onMessage.addListener(request => {
+    if (request === requests.SET_SMART_TV_PLAYER_BUTTON) {
+        handleRetries(setSmartTvPlayerButton);
     }
 });

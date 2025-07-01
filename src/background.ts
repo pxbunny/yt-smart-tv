@@ -1,4 +1,5 @@
 import { getUserAgentUpdateRuleOptions } from 'dynamic-rules';
+import requests from 'requests';
 
 const BASE_URL = 'https://www.youtube.com';
 
@@ -29,23 +30,23 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (!isPageLoaded || !isYouTubePage) return;
 
     if (url.includes('watch') && !url.includes('tv')) {
-        chrome.tabs.sendMessage(tabId, 'set-smart-tv-player-button');
+        chrome.tabs.sendMessage(tabId, requests.SET_SMART_TV_PLAYER_BUTTON);
     }
 });
 
 chrome.runtime.onMessage.addListener(async (request, sender) => {
-    if (request === 'open-smart-tv') {
+    if (request === requests.OPEN_SMART_TV) {
         await openSmartTv();
     }
 
-    if (request === 'open-smart-tv-with-uri') {
+    if (request === requests.OPEN_SMART_TV_WITH_URI) {
         const uri = sender.tab?.url?.replace(BASE_URL, '');
         await openSmartTv(uri);
     }
 
-    if (request === 'exit-smart-tv') {
-        sender.tab?.id && chrome.tabs.remove(sender.tab.id);
-    }
+    // if (request === 'exit-smart-tv') {
+    //     sender.tab?.id && chrome.tabs.remove(sender.tab.id);
+    // }
 });
 
 chrome.action.onClicked.addListener(async () => {
