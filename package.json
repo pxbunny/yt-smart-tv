@@ -1,5 +1,5 @@
 {
-  "name": "youtube-extension",
+  "name": "yt-smart-tv",
   "scripts": {
     "lint:src": "eslint . --ext .ts",
     "lint-staged": "lint-staged",
