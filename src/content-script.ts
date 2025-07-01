@@ -94,7 +94,7 @@ const addSmartTvPlayerButton = (): boolean => {
     return true;
 };
 
-const setButton = (
+const handleRetries = (
     callback: typeof addSmartTvButton | typeof addSmartTvMiniButton,
     delay = 200
 ): void => {
@@ -103,11 +103,11 @@ const setButton = (
     }, delay);
 };
 
-setButton(addSmartTvButton);
-setButton(addSmartTvMiniButton);
+handleRetries(addSmartTvButton);
+handleRetries(addSmartTvMiniButton);
 
 chrome.runtime.onMessage.addListener(request => {
     if (request === 'set-smart-tv-player-button') {
-        setButton(addSmartTvPlayerButton);
+        handleRetries(addSmartTvPlayerButton);
     }
 });

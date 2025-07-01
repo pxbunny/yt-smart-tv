@@ -1,18 +1,19 @@
 import { getUserAgentUpdateRuleOptions } from 'dynamic-rules';
-import { handleTvModeExit } from 'exit-handler';
+
+const BASE_URL = 'https://www.youtube.com';
 
 const openSmartTv = async (uri?: string) => {
-    const smartTvWindow = await chrome.windows.create({
-        url: 'https://www.youtube.com/tv' + uri,
+    await chrome.windows.create({
+        url: `${BASE_URL}/tv` + uri,
         state: 'fullscreen',
         focused: true
     });
 
-    chrome.scripting.executeScript({
-        target: { tabId: smartTvWindow.tabs![0].id! },
-        injectImmediately: true,
-        func: handleTvModeExit
-    });
+    // chrome.scripting.executeScript({
+    //     target: { tabId: smartTvWindow.tabs![0].id! },
+    //     injectImmediately: true,
+    //     func: handleTvModeExit
+    // });
 };
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -22,9 +23,12 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     const { url } = tab;
 
-    if (changeInfo.status !== 'complete' || !url) return;
+    const isPageLoaded = changeInfo.status === 'complete';
+    const isYouTubePage = url && url.includes(BASE_URL);
 
-    if (url.includes('watch')) {
+    if (!isPageLoaded || !isYouTubePage) return;
+
+    if (url.includes('watch') && !url.includes('tv')) {
         chrome.tabs.sendMessage(tabId, 'set-smart-tv-player-button');
     }
 });
@@ -35,7 +39,7 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
     }
 
     if (request === 'open-smart-tv-with-uri') {
-        const uri = sender.tab?.url?.replace('https://www.youtube.com', '');
+        const uri = sender.tab?.url?.replace(BASE_URL, '');
         await openSmartTv(uri);
     }
 
