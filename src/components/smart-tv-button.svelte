@@ -8,9 +8,9 @@
     onclick?: () => void;
   };
 
-  let { id, mini, onclick }: Props = $props();
+  let props: Props = $props();
 </script>
 
-<GuideButton id={id} mini={mini} {onclick} label="Smart TV">
+<GuideButton {...props} label="Smart TV">
   <IoTvOutlineIcon width="24" height="24" />
 </GuideButton>

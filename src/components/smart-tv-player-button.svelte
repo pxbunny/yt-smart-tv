@@ -6,19 +6,19 @@
     onclick?: () => void;
   };
 
-  let { id, onclick }: Props = $props();
+  let props: Props = $props();
 
+  const { id } = props;
   const title = 'Smart TV';
 </script>
 
 <button
-  id={id}
+  {...props}
   class="ytp-button"
   data-tooltip-target-id={id}
   data-title-no-tooltip={title}
   aria-label={title}
   title={title}
-  {onclick}
 >
   <TvPlayerIcon />
 </button>
