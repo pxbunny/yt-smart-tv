@@ -1,8 +1,15 @@
 <script lang="ts">
-  export let id: string | undefined = undefined;
-  export let mini = false;
-  export let onClick: (() => void) | undefined = undefined;
-  export let label: string | undefined = undefined;
+  import { type Snippet } from 'svelte';
+
+  type Props = {
+    id?: string;
+    mini?: boolean;
+    onclick?: () => void;
+    label?: string;
+    children?: Snippet;
+  };
+
+  let { id, mini, onclick, label, children }: Props = $props();
 </script>
 
 <div
@@ -11,14 +18,14 @@
 >
   <button
     id="endpoint"
-    on:click={onClick}
     class={`yt-simple-endpoint ${mini ? 'smart-tv-mini-button ytd-mini-guide-entry-renderer' : 'smart-tv-button ytd-guide-entry-renderer'}`}
+    {onclick}
   >
     <div
       class={`guide-icon ${mini ? 'ytd-mini-guide-entry-renderer' : 'ytd-guide-entry-renderer'}`}
     >
       <span class="yt-icon-shape yt-icon yt-spec-icon-shape">
-        <slot />
+        {@render children?.()}
       </span>
     </div>
     <span class={`title ${mini ? 'ytd-mini-guide-entry-renderer' : 'ytd-guide-entry-renderer'}`}>

@@ -7,4 +7,4 @@ await esbuild.build({
   outfile: resolveFilePath('dist', 'background.js'),
   bundle: true,
   minify: true,
-});
+}).catch(() => process.exit(1));

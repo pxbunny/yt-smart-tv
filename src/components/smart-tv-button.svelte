@@ -2,11 +2,15 @@
   import GuideButton from './guide-button.svelte';
   import IoTvOutlineIcon from './io-tv-outline-icon.svelte';
 
-  export let id: string | undefined = undefined;
-  export let mini = false;
-  export let onClick: (() => void) | undefined = undefined;
+  type Props = {
+    id?: string;
+    mini?: boolean;
+    onclick?: () => void;
+  };
+
+  let { id, mini, onclick }: Props = $props();
 </script>
 
-<GuideButton id={id} mini={mini} onClick={onClick} label="Smart TV">
+<GuideButton id={id} mini={mini} {onclick} label="Smart TV">
   <IoTvOutlineIcon width="24" height="24" />
 </GuideButton>

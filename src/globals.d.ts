@@ -4,7 +4,7 @@ declare module '*.json' {
 }
 
 declare module '*.svelte' {
-    import { ComponentType } from 'svelte';
-    const component: ComponentType;
+    import { ComponentType, SvelteComponent } from 'svelte';
+    const component: ComponentType<SvelteComponent<any>>;
     export default component;
 }

@@ -9,4 +9,4 @@ await esbuild.build({
   outfile: resolveFilePath('dist', 'yt-smart-tv.js'),
   plugins: [sveltePlugin({ preprocess: sveltePreprocess() })],
   bundle: true,
-});
+}).catch(() => process.exit(1));

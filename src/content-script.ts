@@ -1,6 +1,7 @@
 import SmartTvButton from 'components/smart-tv-button.svelte';
 import SmartTvPlayerButton from 'components/smart-tv-player-button.svelte';
 import requests from 'requests';
+import { mount } from 'svelte';
 
 const { sendMessage, onMessage } = chrome.runtime;
 
@@ -14,12 +15,12 @@ const addSmartTvButton = (): boolean => {
 
     if (!target) return false;
 
-    new SmartTvButton({
+    mount(SmartTvButton, {
         target,
         anchor: anchor ?? undefined,
         props: {
             id: buttonId,
-            onClick: () => sendMessage(requests.OPEN_SMART_TV)
+            onclick: () => sendMessage(requests.OPEN_SMART_TV)
         }
     });
 
@@ -45,12 +46,12 @@ const addSmartTvMiniButton = (observeTargetMutations = true): boolean => {
         }).observe(target, { childList: true });
     }
 
-    new SmartTvButton({
+    mount(SmartTvButton as any, {
         target: target,
         props: {
             id: buttonId,
             mini: true,
-            onClick: () => sendMessage(requests.OPEN_SMART_TV)
+            onclick: () => sendMessage(requests.OPEN_SMART_TV)
         }
     });
 
@@ -80,12 +81,12 @@ const setSmartTvPlayerButton = (): boolean => {
         sendMessage(requests.OPEN_SMART_TV_WITH_URI);
     };
 
-    new SmartTvPlayerButton({
+    mount(SmartTvPlayerButton as any, {
         target,
         anchor: anchor ?? undefined,
         props: {
             id: buttonId,
-            onClick: handleClick
+            onclick: handleClick
         }
     });
 
