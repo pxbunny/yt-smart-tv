@@ -14,7 +14,7 @@
 
 <div
   id={id}
-  class={mini ? 'ytd-mini-guide-renderer' : 'container ytd-guide-section-renderer'}
+  class={mini ? 'smart-tv-mini-guide ytd-mini-guide-renderer' : 'container ytd-guide-section-renderer'}
 >
   <button
     id="endpoint"
@@ -35,6 +35,16 @@
 </div>
 
 <style>
+  .smart-tv-mini-guide {
+    border-radius: 10px;
+  }
+
+  .smart-tv-mini-guide:hover,
+  .smart-tv-mini-guide:focus {
+    background-color: var(--yt-spec-badge-chip-background);
+    outline: none;
+  }
+
   .container {
     width: calc(100% - 12px);
   }
@@ -64,5 +74,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .smart-tv-mini-guide .title {
+    color: var(--yt-spec-text-primary);
   }
 </style>
