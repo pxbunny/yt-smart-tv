@@ -26,6 +26,11 @@
       "js": ["yt-smart-tv.js"],
       "css": ["yt-smart-tv.css"],
       "run_at": "document_end"
+    },
+    {
+      "matches": ["https://*.youtube.com/tv*"],
+      "js": ["yt-smart-tv-exit-script.js"],
+      "run_at": "document_idle"
     }
   ],
   "manifest_version": 3

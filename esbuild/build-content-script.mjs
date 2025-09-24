@@ -10,3 +10,9 @@ await esbuild.build({
   plugins: [sveltePlugin({ preprocess: sveltePreprocess() })],
   bundle: true,
 }).catch(() => process.exit(1));
+
+await esbuild.build({
+  entryPoints: [resolveFilePath('src', 'content-script-tv.ts')],
+  outfile: resolveFilePath('dist', 'yt-smart-tv-exit-script.js'),
+  bundle: true,
+}).catch(() => process.exit(1));

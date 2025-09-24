@@ -40,6 +40,11 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
         const uri = sender.tab?.url?.replace(BASE_URL, '');
         await openSmartTv(uri, isIncognito);
     }
+
+    if (request === requests.CLOSE_SMART_TV) {
+        const tabId = sender.tab?.id ?? 0;
+        chrome.tabs.remove(tabId);
+    }
 });
 
 chrome.action.onClicked.addListener(async () => {
