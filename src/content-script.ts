@@ -64,10 +64,7 @@ const setSmartTvPlayerButton = (): boolean => {
     if (document.getElementById(buttonId)) return true;
 
     const target = document.querySelector('.ytp-right-controls');
-
-    const anchor =
-        document.querySelector('.ytp-miniplayer-button') ??
-        document.querySelector('.ytp-fullscreen-button');
+    const anchor = document.querySelector('.ytp-fullscreen-button');
 
     if (!target) return false;
 
