@@ -15,7 +15,7 @@ This extension makes it easier to open YouTube in TV mode. It integrates with th
 ## Compatibility
 
 - Works with **Google Chrome** (latest version).  
-- Should also work with other Chromium-based browsers such as **Microsoft Edge**, **Vivaldi**, **Brave** etc.
+- Also works with other Chromium-based browsers such as Microsoft Edge, Vivaldi, and Brave.
 
 
 ## Privacy
