@@ -8,7 +8,8 @@ This extension makes it easier to open YouTube in TV mode. It integrates with th
 1. Clone or download this repository.
 2. Open `chrome://extensions` in your browser.
 3. Enable **Developer mode** (top right).
-4. Click **Load unpacked** and select the project folder.
+4. Build the project: `npm run build`
+5. Click **Load unpacked** and select the `dist` folder.
 
 
 ## Compatibility
