@@ -1,7 +1,14 @@
-# YouTube Smart TV Browser Extension
+<p align="center">
+  <img src="assets/logo.svg" alt="YouTube Smart TV – logo" width="128" />
+</p>
 
-[![License: GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+<h1 align="center">YouTube Smart TV Browser Extension</h1>
 
+<p align="center">
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL-3.0">
+  </a>
+</p>
 
 A lightweight browser extension that adds a **“Open in TV mode”** control to YouTube. It integrates with the standard YouTube layout by adding:
 
