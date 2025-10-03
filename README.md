@@ -29,7 +29,7 @@ so you can quickly switch to **YouTube TV** UI and control playback from your ph
 
 ### Steps
 
-1. **Clone** the repository:
+1. Clone the repository:
 ```bash
 git clone https://github.com/pxbunny/yt-smart-tv.git
 cd yt-smart-tv
