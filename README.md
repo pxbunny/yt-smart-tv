@@ -10,6 +10,7 @@
   </a>
 </p>
 
+
 A lightweight browser extension that adds a **“Open in TV mode”** control to YouTube. It integrates with the standard YouTube layout by adding:
 
 - a button in the left navigation menu
