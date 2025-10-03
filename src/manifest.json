@@ -30,7 +30,7 @@
     {
       "matches": ["https://*.youtube.com/tv*"],
       "js": ["yt-smart-tv-exit-script.js"],
-      "run_at": "document_idle"
+      "run_at": "document_end"
     }
   ],
   "manifest_version": 3
