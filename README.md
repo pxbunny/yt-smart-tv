@@ -43,18 +43,23 @@ git clone https://github.com/pxbunny/yt-smart-tv.git
 cd yt-smart-tv
 ```
 
-2. Install dependencies:
+2. (Optional) Enable local git hooks:
+```bash
+git config core.hooksPath .githooks
+```
+
+3. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Build the extension:
+4. Build the extension:
 ```bash
 npm run build
 ```
 This creates a production build in the `dist/` folder.
 
-4. Load unpacked:
+5. Load unpacked:
 - Open `chrome://extensions`.
 - Enable **Developer mode** (top-right).
 - Click **Load unpacked** and select the `dist/` folder.
