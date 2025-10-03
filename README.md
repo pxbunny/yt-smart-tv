@@ -1,28 +1,84 @@
-# YouTube Smart TV Extension
+# YouTube Smart TV Browser Extension
 
-This extension makes it easier to open YouTube in TV mode. It integrates with the standard YouTube layout by adding a button in the left navigation menu and another next to the fullscreen control. It was mainly created to let you control YouTube easily with your phone.
-
-
-## Installation
-
-1. Clone or download this repository.
-2. Open `chrome://extensions` in your browser.
-3. Enable **Developer mode** (top right).
-4. Build the project: `npm run build`
-5. Click **Load unpacked** and select the `dist` folder.
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 
-## Compatibility
+A lightweight browser extension that adds a **“Open in TV mode”** control to YouTube. It integrates with the standard YouTube layout by adding:
 
-- Works with **Google Chrome** (latest version).  
-- Also works with other Chromium-based browsers such as Microsoft Edge, Vivaldi, and Brave.
+- a button in the left navigation menu
+- a button next to the fullscreen control on the player
+
+so you can quickly switch to **YouTube TV** UI and control playback from your phone.
+
+> **Why?** The TV UI is optimized for remote control. This extension lets you use your phone as a remote while watching YouTube on your computer or big screen.
 
 
-## Privacy
+## ✨ Features
 
-This extension does not collect, store, or share any personal data. All functionality works entirely in your browser.
+- One-click switch to **YouTube TV** (`https://www.youtube.com/tv`).
+- Buttons integrated directly into the YouTube interface (sidebar + player controls).
+- Works entirely client-side; no data leaves your browser.
+- Designed for Chromium-based browsers.
 
 
-## License
+## 📦 Installation (from source)
 
-This project is licensed under the [GPL-3.0 License](./LICENSE).  
+### Requirements
+- **Node.js** 18+ and **npm** 9+ (or **pnpm/yarn**)
+- A Chromium-based browser (Chrome, Edge, Brave, Vivaldi, etc.)
+
+### Steps
+
+1. **Clone** the repository:
+```bash
+git clone https://github.com/pxbunny/yt-smart-tv.git
+cd yt-smart-tv
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Build the extension:
+```bash
+npm run build
+```
+This creates a production build in the `dist/` folder.
+
+4. Load unpacked:
+- Open `chrome://extensions`.
+- Enable **Developer mode** (top-right).
+- Click **Load unpacked** and select the `dist/` folder.
+
+
+## ▶️ Usage
+
+1. Open a regular YouTube page.
+2. Click Open in TV mode from the left menu or the TV icon near fullscreen on the player.
+3. YouTube will open in TV mode in a new window.
+4. To exit TV mode, press `Esc` or `Backspace`.
+
+
+## 📱 Link your phone with a TV code
+
+You can pair your phone with YouTube running in TV mode and use it as a remote control.
+
+1. Open YouTube TV mode.
+2. Go to **Settings → Watch on TV → Enter TV code**.
+3. Follow on-screen steps to finish pairing.
+
+> After pairing, you can queue videos, control playback/volume, and browse from your phone while the TV UI plays on your computer.
+
+
+## ✅ Compatibility
+
+- **Google Chrome**
+- **Microsoft Edge**, **Brave**, **Vivaldi**, and other Chromium-based browsers
+
+
+## 🔒 Privacy & Permissions
+
+- The extension does not collect, store, or transmit personal data.
+- All functionality runs locally in your browser.
+- Uses minimal permissions limited to YouTube pages required to inject the UI controls.
