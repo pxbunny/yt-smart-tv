@@ -18,14 +18,14 @@ A lightweight browser extension that adds an **“Open in TV mode”** control t
 
 so you can quickly switch to **YouTube TV** UI and control playback from your phone.
 
-> **Why?** The TV UI is optimized for remote control. This extension lets you use your phone as a remote while watching YouTube on your computer or big screen.
+> **Why?** The TV UI is optimized for remote control. This extension lets you use your phone as a remote while watching YouTube on your computer.
 
 
 ## ✨ Features
 
 - One-click switch to **YouTube TV** (`https://www.youtube.com/tv`).
-- Buttons integrated directly into the YouTube interface (sidebar + player controls).
-- Works entirely client-side; no data leaves your browser.
+- Buttons integrated into the YouTube interface (sidebar + player controls).
+- Works entirely client-side, no data leaves your browser.
 - Designed for Chromium-based browsers.
 
 
