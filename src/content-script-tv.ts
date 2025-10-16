@@ -1,37 +1,55 @@
 import requests from 'requests';
 
-const timeoutDelayMs = 200;
+const TIMEOUT_MS = 200;
 
-const isExitHeaderDisplayed = () => {
-    const query = `yt-formatted-string[idomkey="ytLrOverlayPanelHeaderRendererTitle"]`;
-    const headers = document.querySelectorAll(query);
-    const exitHeader = Array.from(headers).find(el => el.textContent === 'Exit YouTube');
-    return !!exitHeader;
+const EXIT_HEADER_SELECTOR = 'yt-formatted-string[idomkey="ytLrOverlayPanelHeaderRendererTitle"]';
+const EXIT_HEADER = 'Exit YouTube';
+
+let requestAlreadySent = false;
+
+const sendExitRequestOnce = () => {
+    if (requestAlreadySent) return;
+
+    requestAlreadySent = true;
+    chrome.runtime.sendMessage(requests.CLOSE_SMART_TV);
 };
 
-const callback: MutationCallback = (mutationList: MutationRecord[], observer: MutationObserver) => {
-    mutationList.forEach(mutation => {
-        if (mutation.addedNodes.length < 1 || !isExitHeaderDisplayed()) return;
+const isExitScreenDisplayed = (container: Element) => {
+    const headers = container.querySelectorAll(EXIT_HEADER_SELECTOR);
 
-        observer.disconnect();
-        chrome.runtime.sendMessage(requests.CLOSE_SMART_TV);
+    return Array.from(headers).some(
+        header => header.textContent.trim().toLowerCase() === EXIT_HEADER.toLowerCase()
+    );
+};
+
+const setTvModeExitScreenObserver = (container: Element) => {
+    const observer = new MutationObserver((mutations, observer) => {
+        mutations.forEach(mutation => {
+            if (mutation.addedNodes.length < 1 || !isExitScreenDisplayed(container)) return;
+
+            observer.disconnect();
+            sendExitRequestOnce();
+        });
     });
+
+    const mutationOptions = { childList: true, subtree: true };
+    observer.observe(container, mutationOptions);
 };
 
-const timeoutHandler = () => {
-    const exitScreenContainer = document.querySelector('zylon-provider-3');
+const handleTvModeExit = () => {
+    const container = document.querySelector('zylon-provider-3');
 
-    if (!exitScreenContainer) {
-        setTimeout(timeoutHandler, timeoutDelayMs);
+    if (!container) {
+        setTimeout(() => handleTvModeExit(), TIMEOUT_MS);
         return;
     }
 
-    if (isExitHeaderDisplayed()) {
-        chrome.runtime.sendMessage(requests.CLOSE_SMART_TV);
+    if (isExitScreenDisplayed(container)) {
+        sendExitRequestOnce();
         return;
     }
 
-    new MutationObserver(callback).observe(exitScreenContainer, { childList: true });
+    setTvModeExitScreenObserver(container);
 };
 
-setTimeout(timeoutHandler, timeoutDelayMs);
+setTimeout(handleTvModeExit, TIMEOUT_MS);
