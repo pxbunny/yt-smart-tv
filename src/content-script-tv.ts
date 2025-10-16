@@ -1,15 +1,17 @@
 import requests from 'requests';
 
+const timeoutDelayMs = 200;
+
+const isExitHeaderDisplayed = () => {
+    const query = `yt-formatted-string[idomkey="ytLrOverlayPanelHeaderRendererTitle"]`;
+    const headers = document.querySelectorAll(query);
+    const exitHeader = Array.from(headers).find(el => el.textContent === 'Exit YouTube');
+    return !!exitHeader;
+};
+
 const callback: MutationCallback = (mutationList: MutationRecord[], observer: MutationObserver) => {
     mutationList.forEach(mutation => {
-        if (mutation.addedNodes.length < 1) return;
-
-        const query = `yt-formatted-string[idomkey="ytLrOverlayPanelHeaderRendererTitle"]`;
-        const exitHeader = Array.from(document.querySelectorAll(query)).find(
-            el => el.textContent === 'Exit YouTube'
-        );
-
-        if (!exitHeader) return;
+        if (mutation.addedNodes.length < 1 || !isExitHeaderDisplayed()) return;
 
         observer.disconnect();
         chrome.runtime.sendMessage(requests.CLOSE_SMART_TV);
@@ -24,8 +26,12 @@ const timeoutHandler = () => {
         return;
     }
 
+    if (isExitHeaderDisplayed()) {
+        chrome.runtime.sendMessage(requests.CLOSE_SMART_TV);
+        return;
+    }
+
     new MutationObserver(callback).observe(exitScreenContainer, { childList: true });
 };
 
-const timeoutDelayMs = 200;
 setTimeout(timeoutHandler, timeoutDelayMs);
