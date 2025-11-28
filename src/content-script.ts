@@ -10,14 +10,12 @@ const addSmartTvButton = (): boolean => {
 
     if (document.getElementById(buttonId)) return true;
 
-    const target = document.querySelector('#items.ytd-guide-section-renderer');
-    const anchor = document.querySelector('#items > ytd-guide-collapsible-section-entry-renderer');
+    const target = document.querySelectorAll('#items.ytd-guide-section-renderer')?.[0];
 
     if (!target) return false;
 
     mount(SmartTvButton, {
         target,
-        anchor: anchor ?? undefined,
         props: {
             id: buttonId,
             onclick: () => sendMessage(requests.OPEN_SMART_TV)
@@ -32,7 +30,7 @@ const addSmartTvMiniButton = (observeTargetMutations = true): boolean => {
 
     if (document.getElementById(buttonId)) return true;
 
-    const target = document.querySelector('#items.ytd-mini-guide-renderer');
+    const target = document.querySelectorAll('#items.ytd-mini-guide-renderer')?.[0];
 
     if (!target) return false;
 
