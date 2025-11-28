@@ -18,13 +18,12 @@ A lightweight browser extension that adds an **“Open in TV mode”** control t
 
 so you can quickly switch to **YouTube TV** UI and control playback from your phone.
 
-> **Why?** The TV UI is optimized for remote control. This extension lets you use your phone as a remote while watching YouTube on your computer.
-
 
 ## ✨ Features
 
 - One-click switch to **YouTube TV** (`https://www.youtube.com/tv`).
 - Buttons integrated into the YouTube interface (sidebar + player controls).
+- Player button resumes the current video at the same timestamp in TV mode.
 - Works entirely client-side, no data leaves your browser.
 - Designed for Chromium-based browsers.
 
@@ -68,9 +67,8 @@ This creates a production build in the `dist/` folder.
 ## ▶️ Usage
 
 1. Open a regular YouTube page.
-2. Click Open in TV mode from the left menu or the TV icon near fullscreen on the player.
-3. YouTube will open in TV mode in a new window.
-4. To exit, press `Esc` to go back to **Home**, then press `Esc` again to leave TV mode.
+2. Click **Smart TV** from the left menu or the TV icon near the fullscreen button.
+3. YouTube opens in TV mode in a new window. Press `Esc` inside TV mode to leave.
 
 
 ## 📱 Link your phone with a TV code
@@ -78,8 +76,8 @@ This creates a production build in the `dist/` folder.
 You can pair your phone with YouTube running in TV mode and use it as a remote control.
 
 1. Open YouTube TV mode.
-2. Go to **Settings → Watch on TV → Enter TV code**.
-3. Follow on-screen steps to finish pairing.
+2. Go to **Settings > Watch on TV > Enter TV code**.
+3. Follow the on-screen steps to finish pairing.
 
 > After pairing, you can queue videos, control playback/volume, and browse from your phone while the TV UI plays on your computer.
 
