@@ -8,6 +8,10 @@
     "build:content-script": "node esbuild/build-content-script.mjs",
     "build:copy-manifest": "copyfiles -f ./src/manifest.json ./dist",
     "build:copy-icons": "copyfiles -f ./assets/icon* ./dist/assets",
+    "dev:prepare": "run-s clean build:copy-manifest build:copy-icons",
+    "dev:background": "node esbuild/build-background.mjs --watch",
+    "dev:content-script": "node esbuild/build-content-script.mjs --watch",
+    "dev": "npm run dev:prepare && run-p dev:background dev:content-script",
     "build": "npm run clean && run-p build:*",
     "clean": "rimraf dist",
     "prepare": "git config core.hooksPath .githooks"
