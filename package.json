@@ -23,24 +23,24 @@
     ]
   },
   "dependencies": {
-    "svelte": "5.43.2"
+    "svelte": "5.45.3"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.0",
-    "@tsconfig/svelte": "5.0.5",
-    "@types/chrome": "0.1.27",
-    "@types/node": "24.9.2",
+    "@eslint/js": "9.39.1",
+    "@tsconfig/svelte": "5.0.6",
+    "@types/chrome": "0.1.32",
+    "@types/node": "24.10.1",
     "copyfiles": "2.4.1",
-    "esbuild": "0.25.12",
+    "esbuild": "0.27.0",
     "esbuild-svelte": "0.9.3",
-    "eslint": "9.39.0",
+    "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "lint-staged": "16.2.6",
+    "lint-staged": "16.2.7",
     "npm-run-all": "4.1.5",
-    "prettier": "3.6.2",
-    "rimraf": "6.1.0",
+    "prettier": "3.7.3",
+    "rimraf": "6.1.2",
     "svelte-preprocess": "6.0.3",
-    "typescript-eslint": "8.46.2"
+    "typescript-eslint": "8.48.1"
   }
 }
