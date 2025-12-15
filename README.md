@@ -7,7 +7,7 @@
 <p align="center">
   <a href="LICENSE">
     <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL-3.0" />
-    <img src="https://img.shields.io/github/actions/workflow/status/pxbunny/yt-smart-tv/CI.yml?label=Build" alt="CI" />
+    <img src="https://img.shields.io/github/actions/workflow/status/pxbunny/yt-smart-tv/ci.yml?label=Build" alt="CI" />
   </a>
 </p>
 
