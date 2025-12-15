@@ -1,11 +1,10 @@
 import { getUserAgentUpdateRuleOptions } from 'dynamic-rules';
 import requests from 'requests';
-
-const BASE_URL = 'https://www.youtube.com';
+import { getYouTubeRelativeUri, getYouTubeTvUrl, isYouTubeUrl, tryParseUrl } from 'youtube-utils';
 
 const openSmartTv = async (uri = '', incognito = false) => {
     await chrome.windows.create({
-        url: `${BASE_URL}/tv` + uri,
+        url: getYouTubeTvUrl(uri),
         state: 'fullscreen',
         focused: true,
         incognito
@@ -17,14 +16,16 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    const { url } = tab;
-
     const isPageLoaded = changeInfo.status === 'complete';
-    const isYouTubePage = url && url.includes(BASE_URL);
+    const url = tryParseUrl(tab.url);
+    const isYouTubePage = url && isYouTubeUrl(url);
 
     if (!isPageLoaded || !isYouTubePage) return;
 
-    if (url.includes('watch') && !url.includes('tv')) {
+    const isTvMode = url.pathname.startsWith('/tv');
+    const isWatchPage = url.pathname === '/watch';
+
+    if (isWatchPage && !isTvMode) {
         chrome.tabs.sendMessage(tabId, requests.SET_SMART_TV_PLAYER_BUTTON);
     }
 });
@@ -39,14 +40,14 @@ chrome.runtime.onMessage.addListener(async (request, sender) => {
         }
 
         case requests.OPEN_SMART_TV_WITH_URI: {
-            const uri = sender.tab?.url?.replace(BASE_URL, '') ?? '';
+            const uri = getYouTubeRelativeUri(sender.tab?.url);
             await openSmartTv(uri, isIncognito);
             break;
         }
 
         case requests.CLOSE_SMART_TV: {
             const tabId = sender.tab?.id;
-            if (tabId !== undefined) chrome.tabs.remove(tabId);
+            if (tabId != null) chrome.tabs.remove(tabId);
             break;
         }
     }
