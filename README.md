@@ -5,12 +5,8 @@
 <h1 align="center">YouTube Smart TV Browser Extension</h1>
 
 <p align="center">
-  <a href="LICENSE">
-    <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL-3.0" />
-  </a>
-  <a href="https://github.com/pxbunny/yt-smart-tv/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/pxbunny/yt-smart-tv/ci.yml?label=Build" alt="CI" />
-  </a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL-3.0" /></a>
+  <a href="https://github.com/pxbunny/yt-smart-tv/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/pxbunny/yt-smart-tv/ci.yml?label=Build" alt="CI" /></a>
 </p>
 
 A lightweight browser extension that adds an **Open in TV mode** control to YouTube. It integrates with the standard YouTube layout by adding:
@@ -19,6 +15,17 @@ A lightweight browser extension that adds an **Open in TV mode** control to YouT
 - a button next to the fullscreen control on the player
 
 so you can quickly switch to the **YouTube TV** UI and control playback from your phone.
+
+<table align="center">
+  <tr>
+    <td valign="middle" align="center">
+      <img src="assets/screenshot-navigation.png" alt="Sidebar navigation button" width="250" />
+    </td>
+    <td valign="middle" align="center">
+      <img src="assets/screenshot-player.png" alt="Player control button" width="400" />
+    </td>
+  </tr>
+</table>
 
 ## ✨ Features
 
