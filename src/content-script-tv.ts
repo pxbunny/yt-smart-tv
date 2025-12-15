@@ -2,8 +2,9 @@ import requests from 'requests';
 
 const TIMEOUT_MS = 200;
 
-const EXIT_HEADER_SELECTOR = 'yt-formatted-string[idomkey="ytLrOverlayPanelHeaderRendererTitle"]';
-const EXIT_HEADER = 'Exit YouTube';
+const OVERLAY_CONTAINER_SELECTOR = 'yt-unified-overlay-stage > zylon-provider-3';
+const TEXT_ELEMENT_SELECTOR = 'yt-formatted-string';
+const EXIT_HEADER_CONTENT = 'Exit YouTube';
 
 let requestAlreadySent = false;
 
@@ -15,10 +16,10 @@ const sendExitRequestOnce = () => {
 };
 
 const isExitScreenDisplayed = (container: Element) => {
-    const headers = container.querySelectorAll(EXIT_HEADER_SELECTOR);
+    const headers = container.querySelectorAll(TEXT_ELEMENT_SELECTOR);
 
     return Array.from(headers).some(
-        header => header.textContent.trim().toLowerCase() === EXIT_HEADER.toLowerCase()
+        header => header.textContent.trim().toLowerCase() === EXIT_HEADER_CONTENT.toLowerCase()
     );
 };
 
@@ -37,7 +38,7 @@ const setTvModeExitScreenObserver = (container: Element) => {
 };
 
 const handleTvModeExit = () => {
-    const container = document.querySelector('zylon-provider-3');
+    const container = document.querySelector(OVERLAY_CONTAINER_SELECTOR);
 
     if (!container) {
         setTimeout(() => handleTvModeExit(), TIMEOUT_MS);
