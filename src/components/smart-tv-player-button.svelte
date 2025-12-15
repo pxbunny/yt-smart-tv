@@ -13,6 +13,7 @@
 
 <button
   {...props}
+  type="button"
   class="ytp-button"
   aria-label={title}
   title={title}

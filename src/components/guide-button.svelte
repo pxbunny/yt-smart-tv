@@ -19,6 +19,7 @@
   <button
     id="endpoint"
     class={`yt-simple-endpoint ${mini ? 'smart-tv-mini-button ytd-mini-guide-entry-renderer' : 'smart-tv-button ytd-guide-entry-renderer'}`}
+    type="button"
     {onclick}
   >
     <div
@@ -34,7 +35,7 @@
   </button>
 </div>
 
-<style>
+<style lang="scss">
   .smart-tv-mini-guide {
     border-radius: 10px;
   }
