@@ -5,20 +5,20 @@ export const getUserAgentUpdateRuleOptions = (id = 1): DNR.UpdateRuleOptions => 
     removeRuleIds: [id],
     addRules: [
         {
-            id: id,
+            id,
             priority: 1,
             action: {
-                type: 'modifyHeaders' as DNR.RuleActionType,
+                type: 'modifyHeaders',
                 requestHeaders: [
                     {
                         header: 'user-agent',
-                        operation: 'set' as DNR.HeaderOperation,
+                        operation: 'set',
                         value: agents['user-agents']['default']
                     }
                 ]
             },
             condition: {
-                resourceTypes: ['main_frame' as DNR.ResourceType],
+                resourceTypes: ['main_frame'],
                 urlFilter: 'youtube.com/tv'
             }
         }
