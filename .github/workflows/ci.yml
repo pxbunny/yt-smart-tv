@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -24,6 +24,9 @@ jobs:
 
       - name: Install
         run: npm ci
+
+      - name: Test
+        run: npm run test
 
       - name: Lint
         run: npm run lint

@@ -2,6 +2,7 @@ import SmartTvButton from 'components/smart-tv-button.svelte';
 import SmartTvPlayerButton from 'components/smart-tv-player-button.svelte';
 import requests from 'requests';
 import { mount } from 'svelte';
+import { getUrlWithTimestamp } from 'youtube-utils';
 
 const { sendMessage, onMessage } = chrome.runtime;
 
@@ -72,9 +73,8 @@ const setSmartTvPlayerButton = (): boolean => {
         video?.pause();
 
         const currentTime = video?.currentTime ?? 0;
-        const url = new URL(window.location.href);
-        url.searchParams.set('t', Math.floor(currentTime).toString());
-        history.replaceState(null, '', url.href);
+        const urlWithTimestamp = getUrlWithTimestamp(window.location.href, currentTime);
+        history.replaceState(null, '', urlWithTimestamp);
 
         sendMessage(requests.OPEN_SMART_TV_WITH_URI);
     };

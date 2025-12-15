@@ -12,5 +12,6 @@ fi
 echo -e "\n🔨 Building project..."
 
 npm run build
+npm run test
 
 echo -e "\n🎉 Pre-push status: success 🎉\n"

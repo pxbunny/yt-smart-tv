@@ -3,6 +3,7 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run tests",
     "lint-staged": "lint-staged",
     "format": "prettier **/*.ts --write",
     "build:background": "node esbuild/build-background.mjs",
@@ -43,6 +44,7 @@
     "rimraf": "6.1.2",
     "sass": "1.96.0",
     "svelte-preprocess": "6.0.3",
-    "typescript-eslint": "8.48.1"
+    "typescript-eslint": "8.48.1",
+    "vitest": "4.0.15"
   }
 }
