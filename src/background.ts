@@ -32,18 +32,23 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.runtime.onMessage.addListener(async (request, sender) => {
     const isIncognito = sender.tab?.incognito ?? false;
 
-    if (request === requests.OPEN_SMART_TV) {
-        await openSmartTv('', isIncognito);
-    }
+    switch (request) {
+        case requests.OPEN_SMART_TV: {
+            await openSmartTv('', isIncognito);
+            break;
+        }
 
-    if (request === requests.OPEN_SMART_TV_WITH_URI) {
-        const uri = sender.tab?.url?.replace(BASE_URL, '');
-        await openSmartTv(uri, isIncognito);
-    }
+        case requests.OPEN_SMART_TV_WITH_URI: {
+            const uri = sender.tab?.url?.replace(BASE_URL, '') ?? '';
+            await openSmartTv(uri, isIncognito);
+            break;
+        }
 
-    if (request === requests.CLOSE_SMART_TV) {
-        const tabId = sender.tab?.id ?? 0;
-        chrome.tabs.remove(tabId);
+        case requests.CLOSE_SMART_TV: {
+            const tabId = sender.tab?.id;
+            if (tabId !== undefined) chrome.tabs.remove(tabId);
+            break;
+        }
     }
 });
 

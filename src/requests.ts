@@ -1,11 +1,10 @@
-const OPEN_SMART_TV = 'open-smart-tv';
-const OPEN_SMART_TV_WITH_URI = 'open-smart-tv-with-uri';
-const SET_SMART_TV_PLAYER_BUTTON = 'set-smart-tv-player-button';
-const CLOSE_SMART_TV = 'close-smart-tv';
+const requests = {
+    OPEN_SMART_TV: 'open-smart-tv',
+    OPEN_SMART_TV_WITH_URI: 'open-smart-tv-with-uri',
+    SET_SMART_TV_PLAYER_BUTTON: 'set-smart-tv-player-button',
+    CLOSE_SMART_TV: 'close-smart-tv'
+} as const;
 
-export default {
-    OPEN_SMART_TV,
-    OPEN_SMART_TV_WITH_URI,
-    SET_SMART_TV_PLAYER_BUTTON,
-    CLOSE_SMART_TV
-};
+export type Request = (typeof requests)[keyof typeof requests];
+
+export default requests;

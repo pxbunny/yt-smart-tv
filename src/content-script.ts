@@ -10,7 +10,7 @@ const addSmartTvButton = (): boolean => {
 
     if (document.getElementById(buttonId)) return true;
 
-    const target = document.querySelectorAll('#items.ytd-guide-section-renderer')?.[0];
+    const target = document.querySelector('#items.ytd-guide-section-renderer');
 
     if (!target) return false;
 
@@ -30,7 +30,7 @@ const addSmartTvMiniButton = (observeTargetMutations = true): boolean => {
 
     if (document.getElementById(buttonId)) return true;
 
-    const target = document.querySelectorAll('#items.ytd-mini-guide-renderer')?.[0];
+    const target = document.querySelector('#items.ytd-mini-guide-renderer');
 
     if (!target) return false;
 
@@ -44,7 +44,7 @@ const addSmartTvMiniButton = (observeTargetMutations = true): boolean => {
         }).observe(target, { childList: true });
     }
 
-    mount(SmartTvButton as any, {
+    mount(SmartTvButton, {
         target: target,
         props: {
             id: buttonId,
@@ -79,7 +79,7 @@ const setSmartTvPlayerButton = (): boolean => {
         sendMessage(requests.OPEN_SMART_TV_WITH_URI);
     };
 
-    mount(SmartTvPlayerButton as any, {
+    mount(SmartTvPlayerButton, {
         target,
         anchor: anchor ?? undefined,
         props: {
@@ -91,12 +91,12 @@ const setSmartTvPlayerButton = (): boolean => {
     return true;
 };
 
-const handleRetries = (
-    callback: typeof addSmartTvButton | typeof addSmartTvMiniButton,
-    delay = 200
-): void => {
+const handleRetries = (callback: () => boolean, delay = 200, maxAttempts = 100): void => {
+    let attempts = 0;
+
     const interval = setInterval(() => {
-        if (callback()) clearInterval(interval);
+        attempts += 1;
+        if (callback() || attempts >= maxAttempts) clearInterval(interval);
     }, delay);
 };
 

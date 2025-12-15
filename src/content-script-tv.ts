@@ -17,9 +17,10 @@ const sendExitRequestOnce = () => {
 
 const isExitScreenDisplayed = (container: Element) => {
     const headers = container.querySelectorAll(TEXT_ELEMENT_SELECTOR);
+    const expectedHeaderContent = EXIT_HEADER_CONTENT.toLowerCase();
 
     return Array.from(headers).some(
-        header => header.textContent.trim().toLowerCase() === EXIT_HEADER_CONTENT.toLowerCase()
+        header => header.textContent?.trim().toLowerCase() === expectedHeaderContent
     );
 };
 

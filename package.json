@@ -2,6 +2,7 @@
   "name": "yt-smart-tv",
   "scripts": {
     "lint": "eslint . --ext .ts",
+    "typecheck": "tsc --noEmit",
     "lint-staged": "lint-staged",
     "format": "prettier **/*.ts --write",
     "build:background": "node esbuild/build-background.mjs",
