@@ -1,6 +1,7 @@
 import SmartTvButton from 'components/smart-tv-button.svelte';
 import SmartTvPlayerButton from 'components/smart-tv-player-button.svelte';
 import requests from 'requests';
+import { retryUntil } from 'retry';
 import { mount } from 'svelte';
 import { getUrlWithTimestamp } from 'youtube-utils';
 
@@ -91,20 +92,11 @@ const setSmartTvPlayerButton = (): boolean => {
     return true;
 };
 
-const handleRetries = (callback: () => boolean, delay = 200, maxAttempts = 100): void => {
-    let attempts = 0;
-
-    const interval = setInterval(() => {
-        attempts += 1;
-        if (callback() || attempts >= maxAttempts) clearInterval(interval);
-    }, delay);
-};
-
-handleRetries(addSmartTvButton);
-handleRetries(addSmartTvMiniButton);
+retryUntil(addSmartTvButton);
+retryUntil(addSmartTvMiniButton);
 
 onMessage.addListener(request => {
     if (request === requests.SET_SMART_TV_PLAYER_BUTTON) {
-        handleRetries(setSmartTvPlayerButton);
+        retryUntil(setSmartTvPlayerButton);
     }
 });
