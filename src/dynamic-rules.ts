@@ -1,8 +1,8 @@
 import agents from './user-agents.json';
 
-export const getUserAgentUpdateRuleOptions = (
-    id = 1
-): Browser.declarativeNetRequest.UpdateRuleOptions => ({
+type Options = Browser.declarativeNetRequest.UpdateRuleOptions;
+
+export const getUserAgentUpdateRuleOptions = (id = 1): Options => ({
     removeRuleIds: [id],
     addRules: [
         {

@@ -9,7 +9,7 @@ import autoImports from './.wxt/eslint-auto-imports.mjs';
 export default defineConfig(
     autoImports,
     {
-        ignores: ['node_modules/', '.wxt/', '.output/', '**/*.g.ts']
+        ignores: ['node_modules/', '.wxt/', 'dist/', '**/*.g.ts']
     },
     eslint.configs.recommended,
     tseslint.configs.strict,
