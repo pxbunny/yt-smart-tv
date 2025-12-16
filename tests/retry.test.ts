@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { retryUntil } from '../src/retry';
+import { retryUntil } from '../src/utils/retry';
 
 describe('retryUntil', () => {
     afterEach(() => {

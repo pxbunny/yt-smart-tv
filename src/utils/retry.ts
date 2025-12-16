@@ -32,7 +32,6 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
 
     const scheduleNextAttempt = () => {
         const now = Date.now();
-
         if (now >= deadline) {
             cleanup();
             return;

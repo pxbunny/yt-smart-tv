@@ -59,12 +59,12 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
    ```bash
    npm run build
    ```
-   This creates a production build in the `dist/` folder.
+   This creates a production build in the `dist/chrome-mv3/` folder.
 
 4. Load unpacked:
    - Open `chrome://extensions`.
    - Enable **Developer mode** (top-right).
-   - Click **Load unpacked** and select the `dist/` folder.
+   - Click **Load unpacked** and select the `dist/chrome-mv3/` folder.
 
 ## ▶️ Usage
 

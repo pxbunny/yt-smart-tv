@@ -1,22 +1,16 @@
 {
   "name": "yt-smart-tv",
   "scripts": {
-    "lint": "eslint . --ext .ts",
-    "typecheck": "tsc --noEmit",
+    "dev": "wxt",
+    "build": "wxt build",
     "test": "vitest run tests",
+    "zip": "wxt zip",
+    "clean": "wxt clean",
     "lint-staged": "lint-staged",
+    "lint": "eslint . --ext .ts",
     "format": "prettier **/*.ts --write",
-    "build:background": "node esbuild/build-background.mjs",
-    "build:content-script": "node esbuild/build-content-script.mjs",
-    "build:copy-manifest": "copyfiles -f ./src/manifest.json ./dist",
-    "build:copy-icons": "copyfiles -f ./assets/icon* ./dist/assets",
-    "dev:prepare": "run-s clean build:copy-manifest build:copy-icons",
-    "dev:background": "node esbuild/build-background.mjs --watch",
-    "dev:content-script": "node esbuild/build-content-script.mjs --watch",
-    "dev": "npm run dev:prepare && run-p dev:background dev:content-script",
-    "build": "npm run clean && run-p build:*",
-    "clean": "rimraf dist",
-    "prepare": "git config core.hooksPath .githooks"
+    "typecheck": "wxt prepare && tsc -p .wxt/tsconfig.json",
+    "postinstall": "wxt prepare && git config core.hooksPath .githooks"
   },
   "lint-staged": {
     "*.ts": [
@@ -24,27 +18,18 @@
       "eslint"
     ]
   },
-  "dependencies": {
-    "svelte": "5.45.3"
-  },
   "devDependencies": {
     "@eslint/js": "9.39.1",
     "@tsconfig/svelte": "5.0.6",
-    "@types/chrome": "0.1.32",
-    "@types/node": "24.10.1",
-    "copyfiles": "2.4.1",
-    "esbuild": "0.27.0",
-    "esbuild-svelte": "0.9.3",
+    "@wxt-dev/module-svelte": "2.0.4",
     "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "lint-staged": "16.2.7",
-    "npm-run-all": "4.1.5",
     "prettier": "3.7.3",
-    "rimraf": "6.1.2",
-    "sass": "1.96.0",
-    "svelte-preprocess": "6.0.3",
+    "svelte": "5.46.0",
     "typescript-eslint": "8.48.1",
-    "vitest": "4.0.15"
+    "vitest": "4.0.15",
+    "wxt": "0.20.11"
   }
 }
