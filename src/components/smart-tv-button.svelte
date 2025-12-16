@@ -1,6 +1,6 @@
 <script lang="ts">
   import GuideButton from './guide-button.svelte';
-  import IoTvOutlineIcon from './io-tv-outline-icon.svelte';
+  import Icon from './icon.svelte';
 
   type Props = {
     id?: string;
@@ -12,5 +12,5 @@
 </script>
 
 <GuideButton {...props} label="Smart TV">
-  <IoTvOutlineIcon width="24" height="24" />
+  <Icon width="24" height="24" />
 </GuideButton>

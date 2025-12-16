@@ -1,5 +1,5 @@
 <script lang="ts">
-  import IoTvOutlineIcon from './io-tv-outline-icon.svelte';
+  import Icon from './icon.svelte';
 
   type Props = {
     id?: string;
@@ -18,5 +18,5 @@
   aria-label={title}
   title={title}
 >
-  <IoTvOutlineIcon width="24" height="24" />
+  <Icon width="24" height="24" color="white" />
 </button>
