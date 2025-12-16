@@ -39,7 +39,7 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 
 ### Requirements
 
-- **Node.js** 18+ and **npm** 9+
+- **Node.js** 20+
 - A Chromium-based browser (Chrome, Edge, Brave, Vivaldi, etc.)
 
 ### Steps
