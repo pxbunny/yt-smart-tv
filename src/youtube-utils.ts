@@ -21,7 +21,7 @@ export const getYouTubeRelativeUri = (urlString: string | undefined): string => 
     return `${url.pathname}${url.search}${url.hash}`;
 };
 
-export const getYouTubeTvUrl = (uri: string): string => {
+export const getYouTubeTvUrl = (uri = ''): string => {
     let trimmedUri = uri.trim();
     const prefixesToTrimSequence = ['/', 'tv', '/'];
 

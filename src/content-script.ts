@@ -92,7 +92,7 @@ const setSmartTvPlayerButton = (): boolean => {
     return true;
 };
 
-retryUntil(addSmartTvButton);
+retryUntil(addSmartTvButton, { timeoutMs: Number.MAX_SAFE_INTEGER });
 retryUntil(addSmartTvMiniButton);
 
 onMessage.addListener(request => {
