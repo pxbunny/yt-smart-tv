@@ -67,6 +67,7 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
 
         observer = new MutationObserver(() => {
             if (pending) return;
+
             pending = true;
 
             queueMicrotask(() => {
