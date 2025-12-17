@@ -95,7 +95,7 @@ export default defineContentScript({
             return true;
         };
 
-        retryUntil(addSmartTvButton);
+        retryUntil(addSmartTvButton, { retryIndefinitely: true });
         retryUntil(addSmartTvMiniButton);
 
         onMessage.addListener(request => {

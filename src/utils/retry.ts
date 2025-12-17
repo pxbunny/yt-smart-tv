@@ -1,4 +1,5 @@
 export interface RetryOptions {
+    retryIndefinitely?: boolean;
     timeoutMs?: number;
     initialDelayMs?: number;
     maxDelayMs?: number;
@@ -9,6 +10,7 @@ export interface RetryOptions {
 
 export const retryUntil = (callback: () => boolean, options: RetryOptions = {}): void => {
     const {
+        retryIndefinitely = false,
         timeoutMs = 5 * 60 * 1000,
         initialDelayMs = 200,
         maxDelayMs = 5 * 1000,
@@ -31,17 +33,24 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
     };
 
     const scheduleNextAttempt = () => {
+        const currentDelayMs = delayMs;
+        delayMs = Math.min(maxDelayMs, Math.round(delayMs * backoffFactor));
+
+        if (retryIndefinitely) {
+            setTimeout(attempt, currentDelayMs);
+            return;
+        }
+
         const now = Date.now();
+
         if (now >= deadline) {
             cleanup();
             return;
         }
 
         const remainingMs = deadline - now;
-        const nextDelayMs = Math.min(delayMs, remainingMs);
-
+        const nextDelayMs = Math.min(currentDelayMs, remainingMs);
         timeoutId = setTimeout(attempt, nextDelayMs);
-        delayMs = Math.min(maxDelayMs, Math.round(delayMs * backoffFactor));
     };
 
     const attempt = () => {
