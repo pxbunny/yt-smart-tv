@@ -8,100 +8,89 @@ export default defineContentScript({
     excludeMatches: ['https://*.youtube.com/tv*'],
     runAt: 'document_end',
     main() {
-        const { sendMessage, onMessage } = browser.runtime;
-
-        const addSmartTvButton = (): boolean => {
-            const buttonId = 'smart-tv-button';
-
-            if (document.getElementById(buttonId)) return true;
-
-            const target = document.querySelector('#items.ytd-guide-section-renderer');
-
-            if (!target) return false;
-
-            mount(SmartTvButton, {
-                target,
-                props: {
-                    id: buttonId,
-                    onclick: () => sendMessage(requests.OPEN_SMART_TV)
-                }
-            });
-
-            return true;
-        };
-
-        const addSmartTvMiniButton = (observeTargetMutations = true): boolean => {
-            const buttonId = 'smart-tv-mini-button';
-
-            if (document.getElementById(buttonId)) return true;
-
-            const target = document.querySelector('#items.ytd-mini-guide-renderer');
-
-            if (!target) return false;
-
-            if (observeTargetMutations) {
-                new MutationObserver((mutations, observer) => {
-                    mutations.forEach(mutation => {
-                        if (mutation.addedNodes.length < 2) return;
-                        observer.disconnect();
-                        addSmartTvMiniButton(false);
-                    });
-                }).observe(target, { childList: true });
+        retryUntil(
+            () => {
+                const target = document.querySelector('#items.ytd-guide-section-renderer');
+                if (!target) return false;
+                return addSmartTvButton('smart-tv-button', target);
+            },
+            {
+                retryIndefinitely: true,
+                observerRoot: document.querySelector('tp-yt-app-drawer') ?? document.body
             }
+        );
 
-            mount(SmartTvButton, {
-                target,
-                props: {
-                    id: buttonId,
-                    mini: true,
-                    onclick: () => sendMessage(requests.OPEN_SMART_TV)
-                }
-            });
+        retryUntil(
+            () => {
+                const target = document.querySelector('#items.ytd-mini-guide-renderer');
+                if (!target) return false;
+                return addSmartTvButton('smart-tv-mini-button', target, true);
+            },
+            {
+                retryIndefinitely: true,
+                observerRoot: document.querySelector('ytd-mini-guide-renderer') ?? document.body
+            }
+        );
 
-            return true;
-        };
-
-        const setSmartTvPlayerButton = (): boolean => {
-            const buttonId = 'smart-tv-player-button';
-
-            if (document.getElementById(buttonId)) return true;
-
-            const target = document.querySelector('.ytp-right-controls');
-            const anchor = document.querySelector('.ytp-fullscreen-button');
-
-            if (!target) return false;
-
-            const handleClick = () => {
-                const video = document.querySelector('video');
-
-                video?.pause();
-
-                const currentTime = video?.currentTime ?? 0;
-                const urlWithTimestamp = getUrlWithTimestamp(window.location.href, currentTime);
-                history.replaceState(null, '', urlWithTimestamp);
-
-                sendMessage(requests.OPEN_SMART_TV_WITH_URI);
-            };
-
-            mount(SmartTvPlayerButton, {
-                target,
-                anchor: anchor ?? undefined,
-                props: {
-                    id: buttonId,
-                    onclick: handleClick
-                }
-            });
-
-            return true;
-        };
-
-        retryUntil(addSmartTvButton, { retryIndefinitely: true });
-        retryUntil(addSmartTvMiniButton);
-
-        onMessage.addListener(request => {
+        browser.runtime.onMessage.addListener(request => {
             if (request === requests.SET_SMART_TV_PLAYER_BUTTON) {
-                retryUntil(setSmartTvPlayerButton);
+                retryUntil(setSmartTvPlayerButton, {
+                    observerRoot: document.querySelector('#player') ?? document.body
+                });
             }
         });
     }
 });
+
+const addSmartTvButton = (buttonId: string, target: Element, mini = false): boolean => {
+    if (document.getElementById(buttonId)) return true;
+    if (target.children.length < 1) return false;
+
+    const anchor = target?.querySelector(':has(#endpoint[title="Shorts"]) + *');
+
+    mount(SmartTvButton, {
+        target,
+        anchor: anchor ?? undefined,
+        props: {
+            id: buttonId,
+            mini,
+            onclick: () => browser.runtime.sendMessage(requests.OPEN_SMART_TV)
+        }
+    });
+
+    return true;
+};
+
+const setSmartTvPlayerButton = (): boolean => {
+    const buttonId = 'smart-tv-player-button';
+
+    if (document.getElementById(buttonId)) return true;
+
+    const target = document.querySelector('.ytp-right-controls');
+    const anchor = document.querySelector('.ytp-fullscreen-button');
+
+    if (!target) return false;
+
+    const handleClick = () => {
+        const video = document.querySelector('video');
+
+        video?.pause();
+
+        const currentTime = video?.currentTime ?? 0;
+        const urlWithTimestamp = getUrlWithTimestamp(window.location.href, currentTime);
+        history.replaceState(null, '', urlWithTimestamp);
+
+        browser.runtime.sendMessage(requests.OPEN_SMART_TV_WITH_URI);
+    };
+
+    mount(SmartTvPlayerButton, {
+        target,
+        anchor: anchor ?? undefined,
+        props: {
+            id: buttonId,
+            onclick: handleClick
+        }
+    });
+
+    return true;
+};

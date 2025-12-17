@@ -46,13 +46,13 @@ export default defineBackground(() => {
     browser.action.onClicked.addListener(async () => {
         await openSmartTv();
     });
-
-    const openSmartTv = async (uri = '', incognito = false) => {
-        await browser.windows.create({
-            url: getYouTubeTvUrl(uri),
-            state: 'fullscreen',
-            focused: true,
-            incognito
-        });
-    };
 });
+
+const openSmartTv = async (uri = '', incognito = false) => {
+    await browser.windows.create({
+        url: getYouTubeTvUrl(uri),
+        state: 'fullscreen',
+        focused: true,
+        incognito
+    });
+};
