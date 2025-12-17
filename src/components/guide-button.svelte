@@ -20,6 +20,8 @@
     id="endpoint"
     class={`yt-simple-endpoint ${mini ? 'smart-tv-mini-button ytd-mini-guide-entry-renderer' : 'smart-tv-button ytd-guide-entry-renderer'}`}
     type="button"
+    title={label}
+    aria-label={label}
     {onclick}
   >
     <div

@@ -13,10 +13,9 @@
 
 <button
   {...props}
-  type="button"
   class="ytp-button"
-  aria-label={title}
   title={title}
+  aria-label={title}
 >
   <Icon width="24" height="24" color="white" />
 </button>
