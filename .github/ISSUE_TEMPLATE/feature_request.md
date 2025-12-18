@@ -1,20 +1,28 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+about: Suggest an improvement for the YouTube Smart TV extension
+title: '[Feature]: '
+labels: ['enhancement']
+assignees: []
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## Problem / use case
+What are you trying to achieve and why?
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## Proposed solution
+What should the extension do?
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## Alternatives considered
+Any workarounds or different approaches?
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## Browser support
+Should this work on:
+- Chromium browsers (Chrome/Edge/Brave/etc.)?
+- Firefox?
+
+## UX / screenshots (optional)
+Mockups, screenshots, or examples from other extensions.
+
+## Privacy / permissions impact (optional)
+Would this require extra permissions or change data handling?

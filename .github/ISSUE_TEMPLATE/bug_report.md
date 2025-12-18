@@ -1,38 +1,42 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+about: Report a bug in the YouTube Smart TV extension
+title: '[Bug]: '
+labels: ['bug']
+assignees: []
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+## Summary
+What went wrong?
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+## Steps to reproduce
+1.
+2.
+3.
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## Expected result
+What did you expect to happen?
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## Actual result
+What happened instead?
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Environment
+- Extension version:
+- Browser + version: (Chrome/Edge/Brave/Vivaldi/Firefox)
+- OS:
+- Installation method: (store / `dist/chrome-mv3` / `dist/firefox-mv2` / other)
+- YouTube page: (`/watch`, `/tv`, other) + URL if possible
+- Logged in to YouTube: (yes/no)
+- Incognito/Private mode: (on/off) + allowed in incognito/private: (yes/no)
+- Other extensions that may affect YouTube: (ad blocker, sponsorblock, etc.)
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+## Diagnostics (optional but very helpful)
+- Screenshot / screen recording:
+- Console logs from the YouTube tab (DevTools -> Console):
+- Background logs:
+  - Chromium: `chrome://extensions` -> Developer mode -> Service worker -> Inspect views
+  - Firefox: `about:debugging#/runtime/this-firefox` -> Inspect
 
-**Additional context**
-Add any other context about the problem here.
+## Additional context
+Anything else that might matter (network conditions, country/language, first install vs update, etc.).
