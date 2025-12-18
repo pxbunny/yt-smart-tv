@@ -46,7 +46,7 @@ const addSmartTvButton = (buttonId: string, target: Element, mini = false): bool
     if (document.getElementById(buttonId)) return true;
     if (target.children.length < 1) return false;
 
-    const anchor = target?.querySelector(':has(#endpoint[title="Shorts"]) + *');
+    const anchor = target.querySelector(':has(#endpoint[title*="shorts" i]) + *');
 
     mount(SmartTvButton, {
         target,
@@ -67,7 +67,7 @@ const setSmartTvPlayerButton = (): boolean => {
     if (document.getElementById(buttonId)) return true;
 
     const target = document.querySelector('.ytp-right-controls');
-    const anchor = document.querySelector('.ytp-fullscreen-button');
+    const anchor = target?.querySelector('.ytp-fullscreen-button');
 
     if (!target) return false;
 
