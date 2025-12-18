@@ -126,7 +126,7 @@ Run the extension in dev mode:
 You can pair your phone with YouTube running in TV mode and use it as a remote control.
 
 1. Open YouTube TV mode.
-2. Go to **Settings > Watch on TV > Enter TV code**.
+2. Go to **Settings > Link TV & Phone > Link with TV code**.
 3. Follow the on-screen steps to finish pairing.
 
 > After pairing, you can queue videos, control playback/volume, and browse from your phone while the TV UI plays on your computer.
