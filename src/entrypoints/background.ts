@@ -1,4 +1,4 @@
-import { getUserAgentUpdateRuleOptions } from '@/dynamic-rules';
+import { getUserAgentUpdateRuleOptions } from '~/dynamic-rules';
 
 export default defineBackground(() => {
     browser.runtime.onInstalled.addListener(() => {
