@@ -33,14 +33,21 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 - Buttons integrated into the YouTube interface (sidebar + player controls).
 - Player button resumes the current video at the same timestamp in TV mode.
 - Works entirely client-side; no data leaves your browser.
-- Designed for Chromium-based browsers.
+
+<a id="compatibility"></a>
+
+## ✅ Compatibility
+
+- Google Chrome
+- Mozilla Firefox
+- Microsoft Edge, Brave, Vivaldi, and other Chromium-based browsers
 
 ## 📦 Installation (from source)
 
 ### Requirements
 
 - **Node.js** 20+
-- A Chromium-based browser (Chrome, Edge, Brave, Vivaldi, etc.)
+- A compatible browser (see [Compatibility](#compatibility))
 
 ### Steps
 
@@ -59,12 +66,19 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
    ```bash
    npm run build
    ```
-   This creates a production build in the `dist/chrome-mv3/` folder.
+   This creates production builds in:
+   - Chromium: `dist/chrome-mv3/`
+   - Firefox: `dist/firefox-mv2/`
 
-4. Load unpacked:
-   - Open `chrome://extensions`.
+4. Load unpacked (Chromium):
+   - Open [`chrome://extensions`](chrome://extensions).
    - Enable **Developer mode** (top-right).
    - Click **Load unpacked** and select the `dist/chrome-mv3/` folder.
+
+5. Load temporary add-on (Firefox):
+   - Open [`about:debugging#/runtime/this-firefox`](about:debugging#/runtime/this-firefox).
+   - Click **Load Temporary Add-on...**
+   - Select `dist/firefox-mv2/manifest.json`.
 
 ## ▶️ Usage
 
@@ -81,11 +95,6 @@ You can pair your phone with YouTube running in TV mode and use it as a remote c
 3. Follow the on-screen steps to finish pairing.
 
 > After pairing, you can queue videos, control playback/volume, and browse from your phone while the TV UI plays on your computer.
-
-## ✅ Compatibility
-
-- Google Chrome
-- Microsoft Edge, Brave, Vivaldi, and other Chromium-based browsers
 
 ## 🔒 Privacy & permissions
 
