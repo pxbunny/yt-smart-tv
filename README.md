@@ -19,13 +19,13 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 <table align="center">
   <tr>
     <td valign="middle" align="center">
-      <img src="assets/screenshot-navigation.png" alt="Sidebar navigation button" height="200" />
+      <img src="assets/screenshot-navigation.png" alt="Sidebar navigation button" height="180" />
     </td>
-    <td width="100" align="center">
-      <img src="assets/screenshot-navigation-mini.png" alt="Sidebar navigation button (mini)" height="200" />
+    <td align="center">
+      <img src="assets/screenshot-navigation-mini.png" alt="Sidebar navigation button (mini)" height="180" />
     </td>
     <td valign="middle" align="center">
-      <img src="assets/screenshot-player.png" alt="Player control button" width="400" />
+      <img src="assets/screenshot-player.png" alt="Player control button" width="260" />
     </td>
   </tr>
 </table>
@@ -124,7 +124,7 @@ You can pair your phone with YouTube running in TV mode and use it as a remote c
 
 > After pairing, you can queue videos, control playback/volume, and browse from your phone while the TV UI plays on your computer.
 
-<p align="center"><img src="assets/screenshot-tv-code.png" alt="TV code" width="500" /></p>
+<p align="center"><img src="assets/screenshot-tv-code.png" alt="TV code" /></p>
 
 ## 🔒 Privacy & permissions
 
