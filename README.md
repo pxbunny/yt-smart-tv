@@ -80,7 +80,7 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
    - Click **Load Temporary Add-on...**
    - Select `dist/firefox-mv2/manifest.json`.
 
-## Development
+## 🛠️ Development
 
 Run the extension in dev mode:
 
@@ -110,3 +110,7 @@ You can pair your phone with YouTube running in TV mode and use it as a remote c
 - The extension does not collect, store, or transmit personal data.
 - All functionality runs locally in your browser.
 - Uses minimal permissions required to inject the UI controls and apply a User-Agent override for `youtube.com/tv` (via `declarativeNetRequest`).
+
+## 📄 License
+
+Licensed under the **GNU GPLv3**. See [`LICENSE`](LICENSE) for details.
