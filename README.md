@@ -80,6 +80,22 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
    - Click **Load Temporary Add-on...**
    - Select `dist/firefox-mv2/manifest.json`.
 
+## 🕵️ Incognito / Private mode
+
+To use the extension from an incognito/private window (and open Smart TV in that mode), you need to enable it in the browser settings.
+
+### Chromium (Incognito)
+
+1. Open [`chrome://extensions`](chrome://extensions).
+2. Find **YouTube Smart TV** and open **Details**.
+3. Enable **Allow in Incognito**.
+
+### Firefox (Private Windows)
+
+1. Open [`about:addons`](about:addons).
+2. Go to **Extensions** -> **YouTube Smart TV**.
+3. Set **Run in Private Windows** to **Allow**.
+
 ## 🛠️ Development
 
 Run the extension in dev mode:
