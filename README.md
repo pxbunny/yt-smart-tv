@@ -82,6 +82,13 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
    - Open [`about:debugging#/runtime/this-firefox`](about:debugging#/runtime/this-firefox).
    - Click **Load Temporary Add-on...**
    - Select `dist/firefox-mv2/manifest.json`.
+   - Note: Temporary add-ons are removed when Firefox is closed/restarted (they are intended for development).
+
+6. Install from ZIP/XPI (Firefox, persistent):
+   - Build a ZIP package: `npm run zip:firefox` (outputs `dist/yt-smart-tv-*-firefox.zip`).
+   - Rename the file from `.zip` to `.xpi` (Firefox add-ons are ZIP files).
+   - Open [`about:addons`](about:addons) -> gear icon -> **Install Add-on From File...** -> select the `.xpi`.
+   - Note: On stable Firefox, unsigned add-ons may be blocked. For permanent installs, use a signed build (AMO) or Firefox Developer Edition/Nightly (with signing disabled).
 
 ## 🕵️ Incognito / Private mode
 
