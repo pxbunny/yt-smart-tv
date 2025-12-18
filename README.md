@@ -80,6 +80,13 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
    - Click **Load Temporary Add-on...**
    - Select `dist/firefox-mv2/manifest.json`.
 
+## Development
+
+Run the extension in dev mode:
+
+- Chromium: `npm run dev:chrome`
+- Firefox: `npm run dev:firefox`
+
 ## ▶️ Usage
 
 1. Open a regular YouTube page.
