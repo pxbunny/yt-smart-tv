@@ -2,6 +2,22 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { retryUntil } from '../src/utils/retry';
 
+class FakeMutationObserver {
+    constructor(private readonly onMutate: MutationCallback) {}
+
+    observe() {
+        return;
+    }
+
+    disconnect() {
+        return;
+    }
+
+    trigger() {
+        this.onMutate([], this as unknown as MutationObserver);
+    }
+}
+
 describe('retryUntil', () => {
     afterEach(() => {
         vi.useRealTimers();
@@ -82,28 +98,73 @@ describe('retryUntil', () => {
         expect(vi.getTimerCount()).toBe(0);
     });
 
-    it('can succeed via MutationObserver without waiting for the next timer', () => {
+    it('retries indefinitely when retryIndefinitely is true', () => {
+        vi.useFakeTimers();
+        vi.setSystemTime(0);
+
+        const callback = vi.fn(() => false);
+
+        retryUntil(callback, {
+            observeMutations: false,
+            observerRoot: null,
+            retryIndefinitely: true,
+            timeoutMs: 250,
+            initialDelayMs: 100,
+            maxDelayMs: 100,
+            backoffFactor: 1
+        });
+
+        expect(callback).toHaveBeenCalledTimes(1);
+
+        vi.advanceTimersByTime(1_000);
+        expect(callback).toHaveBeenCalledTimes(11);
+        expect(vi.getTimerCount()).toBe(1);
+    });
+
+    it('cancels the pending timer when it succeeds via MutationObserver in retryIndefinitely mode', () => {
         vi.useFakeTimers();
 
         vi.stubGlobal('queueMicrotask', (fn: VoidFunction) => fn());
 
         let lastObserver: MutationObserver | undefined;
 
-        class FakeMutationObserver {
-            constructor(private readonly onMutate: MutationCallback) {}
+        vi.stubGlobal(
+            'MutationObserver',
+            class extends FakeMutationObserver {
+                constructor(onMutate: MutationCallback) {
+                    super(onMutate);
+                    lastObserver = this as unknown as MutationObserver;
+                }
+            } as unknown as typeof MutationObserver
+        );
 
-            observe() {
-                return;
-            }
+        const callback = vi
+            .fn()
+            .mockReturnValueOnce(false) // initial call
+            .mockReturnValueOnce(true); // on mutation
 
-            disconnect() {
-                return;
-            }
+        retryUntil(callback, {
+            retryIndefinitely: true,
+            observeMutations: true,
+            observerRoot: {} as unknown as Node,
+            initialDelayMs: 10_000
+        });
 
-            trigger() {
-                this.onMutate([], this as unknown as MutationObserver);
-            }
-        }
+        expect(callback).toHaveBeenCalledTimes(1);
+        expect(vi.getTimerCount()).toBe(1);
+
+        (lastObserver as unknown as FakeMutationObserver).trigger();
+
+        expect(callback).toHaveBeenCalledTimes(2);
+        expect(vi.getTimerCount()).toBe(0);
+    });
+
+    it('can succeed via MutationObserver without waiting for the next timer', () => {
+        vi.useFakeTimers();
+
+        vi.stubGlobal('queueMicrotask', (fn: VoidFunction) => fn());
+
+        let lastObserver: MutationObserver | undefined;
 
         vi.stubGlobal(
             'MutationObserver',

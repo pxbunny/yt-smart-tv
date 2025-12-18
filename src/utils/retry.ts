@@ -37,7 +37,7 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
         delayMs = Math.min(maxDelayMs, Math.round(delayMs * backoffFactor));
 
         if (retryIndefinitely) {
-            setTimeout(attempt, currentDelayMs);
+            timeoutId = setTimeout(attempt, currentDelayMs);
             return;
         }
 
