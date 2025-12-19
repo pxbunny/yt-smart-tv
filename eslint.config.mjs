@@ -20,8 +20,9 @@ export default defineConfig(
             'simple-import-sort': simpleImportSort
         },
         rules: {
+            "@typescript-eslint/no-non-null-assertion": "off",
             'simple-import-sort/exports': 'warn',
-            'simple-import-sort/imports': 'warn',
+            'simple-import-sort/imports': 'warn'
         }
     }
 );
