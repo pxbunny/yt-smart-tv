@@ -1,49 +1,41 @@
 <script lang="ts">
-  import Icon from '~/components/icon.svelte';
-  import Option from './option.svelte';
+  import Header from './components/header.svelte';
+  import Option from './components/option.svelte';
+  import Section from './components/section.svelte';
 
   let options = $state<Options>({ ...defaultOptions });
 </script>
 
 <main>
-  <header>
-    <Icon width="28" height="28" color="#FF0000" />
-    <h1 class="title">YouTube Smart TV</h1>
-  </header>
+  <Header />
 
-  <section>
-    <h2>Buttons</h2>
-    <div class="grid">
-      <Option
-        title="Sidebar button"
-        description='Adds a "Smart TV" entry in the left navigation menu.'
-        bind:checked={options.showGuideButton}
-      />
+  <Section title="Buttons">
+    <Option
+      title="Sidebar button"
+      description='Adds a "Smart TV" entry in the left navigation menu.'
+      bind:checked={options.showGuideButton}
+    />
 
-      <Option
-        title="Sidebar button (mini)"
-        description='Adds the "Smart TV" entry in the collapsed mini sidebar.'
-        bind:checked={options.showMiniGuideButton}
-      />
+    <Option
+      title="Sidebar button (mini)"
+      description='Adds the "Smart TV" entry in the collapsed mini sidebar.'
+      bind:checked={options.showMiniGuideButton}
+    />
 
-      <Option
-        title="Player button"
-        description="Add a Smart TV button next to the fullscreen control on the player."
-        bind:checked={options.showPlayerButton}
-      />
-    </div>
-  </section>
+    <Option
+      title="Player button"
+      description="Add a Smart TV button next to the fullscreen control on the player."
+      bind:checked={options.showPlayerButton}
+    />
+  </Section>
 
-  <section>
-    <h2>Behavior</h2>
-    <div class="grid">
-      <Option
-        title="Open Smart TV in fullscreen"
-        description="Open TV mode in a new fullscreen window."
-        bind:checked={options.openInFullscreen}
-      />
-    </div>
-  </section>
+  <Section title="Behavior">
+    <Option
+      title="Open Smart TV in fullscreen"
+      description="Open TV mode in a new fullscreen window."
+      bind:checked={options.openInFullscreen}
+    />
+  </Section>
 </main>
 
 <style lang="scss">
@@ -79,12 +71,6 @@
     padding: 0;
   }
 
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   main {
     display: flex;
     flex-direction: column;
@@ -95,29 +81,6 @@
 
     @media (max-width: 640px) {
       padding: 40px 12px;
-    }
-
-    .title {
-      margin: 0 0 0 16px;
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    h2 {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--ytstv-muted);
-    }
-
-    .grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    section {
-      display: grid;
-      gap: 8px;
     }
   }
 </style>

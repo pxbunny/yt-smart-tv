@@ -68,6 +68,11 @@
         border-color: var(--ytstv-border);
         box-shadow: none;
       }
+
+      &:has(:focus-visible) {
+        border-color: var(--ytstv-accent);
+        box-shadow: 0 0 0 2px var(--ytstv-accent);
+      }
     }
 
     .text {
