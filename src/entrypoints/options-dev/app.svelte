@@ -39,45 +39,6 @@
 </main>
 
 <style lang="scss">
-  :global(:root) {
-    color-scheme: dark;
-
-    --ytstv-bg: #0f0f0f;
-    --ytstv-surface: #181818;
-    --ytstv-surface-hover: #1f1f1f;
-    --ytstv-border: rgba(255, 255, 255, 0.1);
-    --ytstv-fg: #f1f1f1;
-    --ytstv-muted: #aaa;
-    --ytstv-accent: #3b82f6;
-    --ytstv-transition-duration: 200ms;
-  }
-
-  :global(html) {
-    font-size: 100%;
-    box-sizing: border-box;
-  }
-
-  :global(*, *::before, *::after) {
-    box-sizing: inherit;
-  }
-
-  :global(body) {
-    font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    color: var(--ytstv-fg);
-    background: var(--ytstv-bg);
-    margin: 0;
-    padding: 0;
-  }
-
-  :global(a) {
-    color: var(--ytstv-accent);
-    text-decoration: none;
-  }
-
-  :global(h1, h2, h3, h4, h5, h6, p) {
-    margin: 0;
-  }
-
   main {
     display: flex;
     flex-direction: column;
