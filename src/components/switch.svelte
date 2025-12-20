@@ -41,23 +41,22 @@
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.1);
     position: relative;
-    transition: background-color 200ms ease;
+    transition: background-color 200ms ease-in-out;
   }
 
   .thumb {
     width: 16px;
     height: 16px;
     border-radius: 999px;
-    background: #f1f1f1;
+    background: var(--ytstv-fg, #f1f1f1);
     position: absolute;
     top: 2px;
     left: 2px;
-    transition: transform 120ms ease;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: transform 200ms ease-in-out;
   }
 
   input:checked + .track {
-    background: #3b82f6;
+    background: var(--ytstv-accent, #3b82f6);
   }
 
   input:checked + .track .thumb {
@@ -65,15 +64,12 @@
   }
 
   input:focus-visible + .track {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid var(--ytstv-accent, #3b82f6);
     outline-offset: 2px;
   }
 
   input:disabled + .track {
     opacity: 0.5;
-  }
-
-  .switch:has(input:disabled) {
     cursor: not-allowed;
   }
 </style>

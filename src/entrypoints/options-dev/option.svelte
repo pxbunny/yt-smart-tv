@@ -39,8 +39,23 @@
     justify-content: space-between;
     gap: 16px;
     padding: 12px 14px;
+    border: 1px solid var(--ytstv-border);
     border-radius: 12px;
-    background: #292a2d;
+    background: var(--ytstv-surface);
+    transition:
+      background-color var(--ytstv-transition-duration) ease-in-out,
+      border-color var(--ytstv-transition-duration) ease-in-out,
+      transform var(--ytstv-transition-duration) ease-in-out,
+      box-shadow var(--ytstv-transition-duration) ease-in-out;
+  }
+
+  .option:hover {
+    background: var(--ytstv-surface-hover);
+  }
+
+  .option:focus-within {
+    border-color: var(--ytstv-accent);
+    box-shadow: 0 0 0 2px var(--ytstv-accent);
   }
 
   .text {
@@ -53,7 +68,7 @@
   }
 
   .description {
-    color: #c4c7c5;
+    color: var(--ytstv-muted);
     font-size: 12px;
   }
 

@@ -1,22 +1,28 @@
 <script lang="ts">
+  import Icon from '~/components/icon.svelte';
   import Option from './option.svelte';
 
   let options = $state<Options>({ ...defaultOptions });
 </script>
 
 <main>
+  <header>
+    <Icon width="28" height="28" color="#FF0000" />
+    <h1 class="title">YouTube Smart TV</h1>
+  </header>
+
   <section>
-    <h1>Buttons</h1>
+    <h2>Buttons</h2>
     <div class="grid">
       <Option
         title="Sidebar button"
-        description="Add a 'Smart TV' entry in the left navigation menu."
+        description='Adds a "Smart TV" entry in the left navigation menu.'
         bind:checked={options.showGuideButton}
       />
 
       <Option
         title="Sidebar button (mini)"
-        description="Add the 'Smart TV' entry in the collapsed mini sidebar."
+        description='Adds the "Smart TV" entry in the collapsed mini sidebar.'
         bind:checked={options.showMiniGuideButton}
       />
 
@@ -29,7 +35,7 @@
   </section>
 
   <section>
-    <h1>Behavior</h1>
+    <h2>Behavior</h2>
     <div class="grid">
       <Option
         title="Open Smart TV in fullscreen"
@@ -43,14 +49,20 @@
 <style lang="scss">
   :global(:root) {
     color-scheme: dark;
+
+    --ytstv-bg: #0f0f0f;
+    --ytstv-surface: #181818;
+    --ytstv-surface-hover: #1f1f1f;
+    --ytstv-border: rgba(255, 255, 255, 0.1);
+    --ytstv-fg: #f1f1f1;
+    --ytstv-muted: #aaa;
+    --ytstv-accent: #3b82f6;
+    --ytstv-transition-duration: 200ms;
   }
 
   :global(html) {
     font-size: 100%;
     box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: auto;
-    scrollbar-gutter: stable both-edges;
   }
 
   :global(*),
@@ -60,34 +72,52 @@
   }
 
   :global(body) {
-    font: 14px/1.45 'Segoe UI', Tahoma, sans-serif;
-    color: #e3e3e3;
-    background: #202124;
+    font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--ytstv-fg);
+    background: var(--ytstv-bg);
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   main {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    max-width: 760px;
+    gap: 24px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 18px 4px;
+    padding: 40px;
+
+    @media (max-width: 640px) {
+      padding: 40px 12px;
+    }
   }
 
-  h1 {
-    margin: 0 0 12px;
+  .title {
+    margin: 0 0 0 16px;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  h2 {
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #aaa;
+    color: var(--ytstv-muted);
   }
 
   .grid {
     display: grid;
     gap: 12px;
+  }
+
+  section {
+    display: grid;
+    gap: 8px;
   }
 </style>
