@@ -1,7 +1,11 @@
 <script lang="ts">
-  export let width: string | number | null | undefined = undefined;
-  export let height: string | number | null | undefined = undefined;
-  export let color: string | null | undefined = 'currentColor';
+  type Props = {
+    width?: string | number | null;
+    height?: string | number | null;
+    color?: string | null;
+  };
+
+  let { width, height, color = 'currentColor' }: Props = $props();
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="96 168 832 666" height={height} width={width}>

@@ -1,16 +1,15 @@
 <script lang="ts">
-  export let checked = false;
-  export let disabled = false;
-  export let ariaLabel: string | undefined = undefined;
+  type Props = {
+    checked?: boolean;
+    disabled?: boolean;
+    ariaLabel?: string;
+  };
+
+  let { checked = $bindable(false), disabled = false, ariaLabel }: Props = $props();
 </script>
 
 <label class="switch">
-  <input
-    type="checkbox"
-    bind:checked
-    disabled={disabled}
-    aria-label={ariaLabel}
-  />
+  <input type="checkbox" bind:checked {disabled} aria-label={ariaLabel} />
   <span class="track" aria-hidden="true">
     <span class="thumb"></span>
   </span>

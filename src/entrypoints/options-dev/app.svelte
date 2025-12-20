@@ -10,13 +10,13 @@
     <div class="grid">
       <Option
         title="Sidebar button"
-        description="Add a “Smart TV” entry in the left navigation menu."
+        description="Add a 'Smart TV' entry in the left navigation menu."
         bind:checked={options.showGuideButton}
       />
 
       <Option
         title="Sidebar button (mini)"
-        description="Add the “Smart TV” entry in the collapsed mini sidebar."
+        description="Add the 'Smart TV' entry in the collapsed mini sidebar."
         bind:checked={options.showMiniGuideButton}
       />
 
@@ -28,7 +28,7 @@
     </div>
   </section>
 
-  <section>
+  <!-- <section>
     <h1>Behavior</h1>
     <div class="grid">
       <Option
@@ -37,7 +37,7 @@
         bind:checked={options.openInFullscreen}
       />
     </div>
-  </section>
+  </section> -->
 </main>
 
 <style lang="scss">
@@ -69,9 +69,9 @@
 
   h1 {
     margin: 0 0 12px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: #aaa;
   }

@@ -1,10 +1,23 @@
 <script lang="ts">
+  import { type Snippet } from 'svelte';
+
   import Switch from '~/components/switch.svelte';
 
-  export let title: string;
-  export let description: string | undefined = undefined;
-  export let checked = false;
-  export let disabled = false;
+  type Props = {
+    title: string;
+    description?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    children?: Snippet;
+  };
+
+  let {
+    title,
+    description,
+    checked = $bindable(false),
+    disabled = false,
+    children
+  }: Props = $props();
 </script>
 
 <div class="option">
@@ -13,14 +26,10 @@
     {#if description}
       <div class="description">{description}</div>
     {/if}
-    <slot />
+    {@render children?.()}
   </div>
   <div class="control">
-    <Switch
-      bind:checked
-      {disabled}
-      ariaLabel={title}
-    />
+    <Switch bind:checked {disabled} ariaLabel={title} />
   </div>
 </div>
 
