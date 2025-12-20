@@ -1,14 +1,35 @@
 <script lang="ts">
-    import { setOptions } from '@/utils/options';
+  import { onDestroy, onMount } from 'svelte';
+
   import Header from './components/header.svelte';
   import Option from './components/option.svelte';
   import Section from './components/section.svelte';
 
   let options = $state<Options>({ ...defaultOptions });
+  let hydrated = $state(false);
+  let timeout: NodeJS.Timeout | undefined;
+
+  onMount(async () => {
+    const stored = await getOptions();
+    Object.assign(options, stored);
+    hydrated = true;
+  });
+
+  onDestroy(() => {
+    clearTimeout(timeout);
+  });
 
   $effect(() => {
-		setOptions(options);
-	});
+    if (!hydrated) return;
+
+    const snapshot: Options = { ...options };
+    clearTimeout(timeout);
+
+    // debounce
+    timeout = setTimeout(() => {
+      setOptions(snapshot);
+    }, 200);
+  });
 </script>
 
 <main>
