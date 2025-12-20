@@ -1,9 +1,14 @@
 <script lang="ts">
+    import { setOptions } from '@/utils/options';
   import Header from './components/header.svelte';
   import Option from './components/option.svelte';
   import Section from './components/section.svelte';
 
   let options = $state<Options>({ ...defaultOptions });
+
+  $effect(() => {
+		setOptions(options);
+	});
 </script>
 
 <main>

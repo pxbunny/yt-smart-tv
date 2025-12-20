@@ -5,33 +5,20 @@ export default defineBackground(() => {
         browser.declarativeNetRequest.updateDynamicRules(getUserAgentUpdateRuleOptions());
     });
 
-    browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-        const isPageLoaded = changeInfo.status === 'complete';
-        const url = tryParseUrl(tab.url);
-        const isYouTubePage = url && isYouTubeUrl(url);
-
-        if (!isPageLoaded || !isYouTubePage) return;
-
-        const isTvMode = url.pathname.startsWith('/tv');
-        const isWatchPage = url.pathname === '/watch';
-
-        if (isWatchPage && !isTvMode) {
-            browser.tabs.sendMessage(tabId, requests.SET_SMART_TV_PLAYER_BUTTON);
-        }
-    });
-
     browser.runtime.onMessage.addListener(async (request, sender) => {
         const isIncognito = sender.tab?.incognito ?? false;
 
         switch (request) {
             case requests.OPEN_SMART_TV: {
-                await openSmartTv('', isIncognito);
+                const { openInFullscreen } = await lazyLoadOptions();
+                await openSmartTv('', isIncognito, openInFullscreen);
                 break;
             }
 
             case requests.OPEN_SMART_TV_WITH_URI: {
                 const uri = getYouTubeRelativeUri(sender.tab?.url);
-                await openSmartTv(uri, isIncognito);
+                const { openInFullscreen } = await lazyLoadOptions();
+                await openSmartTv(uri, isIncognito, openInFullscreen);
                 break;
             }
 
@@ -44,14 +31,25 @@ export default defineBackground(() => {
     });
 
     browser.action.onClicked.addListener(async () => {
-        await openSmartTv();
+        const { openInFullscreen } = await lazyLoadOptions();
+        await openSmartTv('', false, openInFullscreen);
+    });
+
+    browser.storage.onChanged.addListener(async changes => {
+        const newValues: Record<string, unknown> = {};
+        Object.keys(changes).forEach(key => (newValues[key] = changes[key].newValue));
+        options = { ...(await lazyLoadOptions()), ...newValues };
     });
 });
 
-const openSmartTv = async (uri = '', incognito = false) => {
+let options: Options | undefined;
+
+const lazyLoadOptions = async (): Promise<Options> => (options ??= await getOptions());
+
+const openSmartTv = async (uri = '', incognito = false, fullscreen = true) => {
     await browser.windows.create({
         url: getYouTubeTvUrl(uri),
-        state: 'fullscreen',
+        state: fullscreen ? 'fullscreen' : undefined,
         focused: true,
         incognito
     });

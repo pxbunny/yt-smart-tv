@@ -9,7 +9,7 @@ export default defineConfig({
         description: 'One-click launcher for the TV version of YouTube.',
         version: '0.1.0',
         homepage_url: 'https://github.com/pxbunny/yt-smart-tv',
-        permissions: ['declarativeNetRequest', 'tabs'],
+        permissions: ['declarativeNetRequest', 'storage'],
         host_permissions: ['https://*.youtube.com/*'],
         action: {}
     }
