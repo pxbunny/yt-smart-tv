@@ -2,18 +2,17 @@
   type Props = {
     checked?: boolean;
     disabled?: boolean;
-    ariaLabel?: string;
   };
 
-  let { checked = $bindable(false), disabled = false, ariaLabel }: Props = $props();
+  let { checked = $bindable(false), disabled = false }: Props = $props();
 </script>
 
-<label class="switch">
-  <input type="checkbox" bind:checked {disabled} aria-label={ariaLabel} />
+<span class="switch">
+  <input type="checkbox" bind:checked {disabled} />
   <span class="track" aria-hidden="true">
     <span class="thumb"></span>
   </span>
-</label>
+</span>
 
 <style lang="scss">
   .switch {

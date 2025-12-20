@@ -20,7 +20,7 @@
   }: Props = $props();
 </script>
 
-<div class="option">
+<label class="option" class:disabled>
   <div class="text">
     <div class="title">{title}</div>
     {#if description}
@@ -29,9 +29,9 @@
     {@render children?.()}
   </div>
   <div class="control">
-    <Switch bind:checked {disabled} ariaLabel={title} />
+    <Switch bind:checked {disabled} />
   </div>
-</div>
+</label>
 
 <style lang="scss">
   .option {
@@ -42,6 +42,7 @@
     border: 1px solid var(--ytstv-border);
     border-radius: 12px;
     background: var(--ytstv-surface);
+    cursor: pointer;
     transition:
       background-color var(--ytstv-transition-duration) ease-in-out,
       border-color var(--ytstv-transition-duration) ease-in-out,
@@ -49,8 +50,13 @@
       box-shadow var(--ytstv-transition-duration) ease-in-out;
   }
 
-  .option:hover {
+  .option:not(.disabled):hover {
     background: var(--ytstv-surface-hover);
+  }
+
+  .option.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 
   .option:focus-within {
