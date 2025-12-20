@@ -36,8 +36,8 @@
   }
 
   .track {
-    width: 40px;
-    height: 22px;
+    width: 34px;
+    height: 20px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.1);
     position: relative;
@@ -45,8 +45,8 @@
   }
 
   .thumb {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 999px;
     background: #f1f1f1;
     position: absolute;
@@ -61,7 +61,7 @@
   }
 
   input:checked + .track .thumb {
-    transform: translateX(18px);
+    transform: translateX(14px);
   }
 
   input:focus-visible + .track {

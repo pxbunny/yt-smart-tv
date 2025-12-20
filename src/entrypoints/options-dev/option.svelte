@@ -40,7 +40,7 @@
     gap: 16px;
     padding: 12px 14px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #292a2d;
   }
 
   .text {
@@ -53,7 +53,7 @@
   }
 
   .description {
-    color: #aaa;
+    color: #c4c7c5;
     font-size: 12px;
   }
 

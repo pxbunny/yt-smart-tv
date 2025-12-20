@@ -28,7 +28,7 @@
     </div>
   </section>
 
-  <!-- <section>
+  <section>
     <h1>Behavior</h1>
     <div class="grid">
       <Option
@@ -37,7 +37,7 @@
         bind:checked={options.openInFullscreen}
       />
     </div>
-  </section> -->
+  </section>
 </main>
 
 <style lang="scss">
@@ -48,14 +48,24 @@
   :global(html) {
     font-size: 100%;
     box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
+  }
+
+  :global(*),
+  :global(*::before),
+  :global(*::after) {
+    box-sizing: inherit;
   }
 
   :global(body) {
-    font: 14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-    color: #f1f1f1;
-    background: #0f0f0f;
+    font: 14px/1.45 'Segoe UI', Tahoma, sans-serif;
+    color: #e3e3e3;
+    background: #202124;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
   }
 
   main {
@@ -64,7 +74,7 @@
     gap: 18px;
     max-width: 760px;
     margin: 0 auto;
-    padding: 18px 12px;
+    padding: 18px 4px;
   }
 
   h1 {
