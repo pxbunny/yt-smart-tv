@@ -96,28 +96,28 @@
     @media (max-width: 640px) {
       padding: 40px 12px;
     }
-  }
 
-  .title {
-    margin: 0 0 0 16px;
-    font-size: 24px;
-    font-weight: 700;
-  }
+    .title {
+      margin: 0 0 0 16px;
+      font-size: 24px;
+      font-weight: 700;
+    }
 
-  h2 {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--ytstv-muted);
-  }
+    h2 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--ytstv-muted);
+    }
 
-  .grid {
-    display: grid;
-    gap: 12px;
-  }
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
 
-  section {
-    display: grid;
-    gap: 8px;
+    section {
+      display: grid;
+      gap: 8px;
+    }
   }
 </style>

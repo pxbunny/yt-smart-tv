@@ -40,12 +40,16 @@
 <style lang="scss">
   .smart-tv-mini-guide {
     border-radius: 10px;
-  }
 
-  .smart-tv-mini-guide:hover,
-  .smart-tv-mini-guide:focus {
-    background-color: var(--yt-spec-badge-chip-background);
-    outline: none;
+    &:hover,
+    &:focus {
+      background-color: var(--yt-spec-badge-chip-background);
+      outline: none;
+    }
+
+    .title {
+      color: var(--yt-spec-text-primary);
+    }
   }
 
   .container {
@@ -65,7 +69,7 @@
   .smart-tv-button {
     padding: 0 12px;
 
-    & .title {
+    .title {
       text-align: start;
     }
   }
@@ -77,9 +81,5 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .smart-tv-mini-guide .title {
-    color: var(--yt-spec-text-primary);
   }
 </style>

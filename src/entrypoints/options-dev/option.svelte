@@ -48,38 +48,45 @@
       border-color var(--ytstv-transition-duration) ease-in-out,
       transform var(--ytstv-transition-duration) ease-in-out,
       box-shadow var(--ytstv-transition-duration) ease-in-out;
-  }
 
-  .option:not(.disabled):hover {
-    background: var(--ytstv-surface-hover);
-  }
+    &:not(.disabled):hover {
+      background: var(--ytstv-surface-hover);
+    }
 
-  .option.disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
+    &.disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
 
-  .option:focus-within {
-    border-color: var(--ytstv-accent);
-    box-shadow: 0 0 0 2px var(--ytstv-accent);
-  }
+    &:focus-within {
+      border-color: var(--ytstv-accent);
+      box-shadow: 0 0 0 2px var(--ytstv-accent);
+    }
 
-  .text {
-    display: grid;
-    gap: 4px;
-  }
+    @supports selector(.option:has(:focus-visible)) {
+      &:focus-within {
+        border-color: var(--ytstv-border);
+        box-shadow: none;
+      }
+    }
 
-  .title {
-    font-weight: 600;
-  }
+    .text {
+      display: grid;
+      gap: 4px;
+    }
 
-  .description {
-    color: var(--ytstv-muted);
-    font-size: 12px;
-  }
+    .title {
+      font-weight: 600;
+    }
 
-  .control {
-    display: flex;
-    align-items: center;
+    .description {
+      color: var(--ytstv-muted);
+      font-size: 12px;
+    }
+
+    .control {
+      display: flex;
+      align-items: center;
+    }
   }
 </style>
