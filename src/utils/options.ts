@@ -23,7 +23,8 @@ export type OptionKey = keyof Options;
 
 export const optionKeys = Object.keys(defaultOptions) as OptionKey[];
 
-export const isOptionKey = (value: string): boolean => optionKeys.includes(value as OptionKey);
+export const isOptionKey = (value: string): value is OptionKey =>
+    optionKeys.includes(value as OptionKey);
 
 export const getOptions = async (): Promise<Options> => {
     const stored = await browser.storage.sync.get(optionKeys);

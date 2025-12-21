@@ -35,7 +35,7 @@ export default defineBackground(() => {
         await openSmartTv('', false, openInFullscreen);
     });
 
-    browser.storage.onChanged.addListener(async (_, areaName) => {
+    browser.storage.onChanged.addListener((_, areaName) => {
         if (areaName !== 'sync') return;
         options = undefined; // force reload
     });

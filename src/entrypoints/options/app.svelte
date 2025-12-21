@@ -12,7 +12,7 @@
   onMount(() => {
     (async () => {
       const stored = await getOptions();
-      options = { ...defaultOptions, ...stored };
+      Object.assign(options, stored);
       hydrated = true;
     })();
 

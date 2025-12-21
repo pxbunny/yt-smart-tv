@@ -7,6 +7,12 @@ const SMART_TV_BUTTON_ID = 'smart-tv-button';
 const SMART_TV_MINI_BUTTON_ID = 'smart-tv-mini-button';
 const SMART_TV_PLAYER_BUTTON_ID = 'smart-tv-player-button';
 
+const handledOptionKeys = new Set<OptionKey>([
+    'showGuideButton',
+    'showMiniGuideButton',
+    'showPlayerButton'
+]);
+
 export default defineContentScript({
     matches: ['https://*.youtube.com/*'],
     excludeMatches: ['https://*.youtube.com/tv*'],
@@ -17,15 +23,10 @@ export default defineContentScript({
 
             for (const [key, change] of Object.entries(changes)) {
                 const { newValue } = change;
-                const acceptedKeys: OptionKey[] = [
-                    'showGuideButton',
-                    'showMiniGuideButton',
-                    'showPlayerButton'
-                ];
 
-                if (!acceptedKeys.includes(key as OptionKey)) continue;
+                if (!isOptionKey(key) || !handledOptionKeys.has(key)) continue;
 
-                handleOptionChange(key as OptionKey, newValue as boolean);
+                handleOptionChange(key, newValue as boolean);
             }
         });
 
