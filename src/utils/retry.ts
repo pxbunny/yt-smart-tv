@@ -8,7 +8,11 @@ export interface RetryOptions {
     observerRoot?: Node | null;
 }
 
-export const retryUntil = (callback: () => boolean, options: RetryOptions = {}): void => {
+export interface RetryHandle {
+    cancel: () => void;
+}
+
+export const retryUntil = (callback: () => boolean, options: RetryOptions = {}): RetryHandle => {
     const {
         retryIndefinitely = false,
         timeoutMs = 5 * 60 * 1000,
@@ -19,20 +23,39 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
         observerRoot = document.documentElement ?? document.body
     } = options;
 
-    if (callback()) return;
-
-    const deadline = Date.now() + timeoutMs;
+    let active = true;
 
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
     let delayMs = initialDelayMs;
     let observer: MutationObserver | undefined;
 
     const cleanup = () => {
-        if (timeoutId != null) clearTimeout(timeoutId);
+        clearTimeout(timeoutId);
         observer?.disconnect();
+        timeoutId = undefined;
+        observer = undefined;
     };
 
+    const cancel = () => {
+        if (!active) return;
+        active = false;
+        cleanup();
+    };
+
+    const handle: RetryHandle = { cancel };
+
+    const callIfActive = (): boolean => active && callback();
+
+    if (callIfActive()) {
+        cancel();
+        return handle;
+    }
+
+    const deadline = Date.now() + timeoutMs;
+
     const scheduleNextAttempt = () => {
+        if (!active) return;
+
         const currentDelayMs = delayMs;
         delayMs = Math.min(maxDelayMs, Math.round(delayMs * backoffFactor));
 
@@ -44,7 +67,7 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
         const now = Date.now();
 
         if (now >= deadline) {
-            cleanup();
+            cancel();
             return;
         }
 
@@ -54,8 +77,10 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
     };
 
     const attempt = () => {
-        if (callback()) {
-            cleanup();
+        if (!active) return;
+
+        if (callIfActive()) {
+            cancel();
             return;
         }
 
@@ -66,13 +91,14 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
         let pending = false;
 
         observer = new MutationObserver(() => {
-            if (pending) return;
+            if (pending || !active) return;
 
             pending = true;
 
             queueMicrotask(() => {
+                if (!active) return;
                 pending = false;
-                if (callback()) cleanup();
+                if (callIfActive()) cancel();
             });
         });
 
@@ -80,4 +106,5 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
     }
 
     scheduleNextAttempt();
+    return handle;
 };

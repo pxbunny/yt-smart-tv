@@ -34,6 +34,32 @@ describe('retryUntil', () => {
         expect(vi.getTimerCount()).toBe(0);
     });
 
+    it('can be cancelled', () => {
+        vi.useFakeTimers();
+        vi.setSystemTime(0);
+
+        const callback = vi.fn(() => false);
+
+        const handle = retryUntil(callback, {
+            retryIndefinitely: true,
+            observeMutations: false,
+            observerRoot: null,
+            initialDelayMs: 100,
+            maxDelayMs: 100,
+            backoffFactor: 1
+        });
+
+        expect(callback).toHaveBeenCalledTimes(1);
+        expect(vi.getTimerCount()).toBe(1);
+
+        handle.cancel();
+
+        expect(vi.getTimerCount()).toBe(0);
+
+        vi.advanceTimersByTime(10_000);
+        expect(callback).toHaveBeenCalledTimes(1);
+    });
+
     it('retries with backoff until the callback succeeds', () => {
         vi.useFakeTimers();
         vi.setSystemTime(0);

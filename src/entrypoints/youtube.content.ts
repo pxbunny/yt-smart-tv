@@ -13,6 +13,10 @@ const supportedOptionKeys = new Set<OptionKey>([
     'showPlayerButton'
 ]);
 
+let guideButtonRetry: RetryHandle | undefined;
+let miniGuideButtonRetry: RetryHandle | undefined;
+let playerButtonRetry: RetryHandle | undefined;
+
 export default defineContentScript({
     matches: ['https://*.youtube.com/*'],
     excludeMatches: ['https://*.youtube.com/tv*'],
@@ -37,16 +41,16 @@ export default defineContentScript({
 const handleOptionChange = (key: OptionKey, value: boolean) => {
     switch (key) {
         case 'showGuideButton':
-            if (value) setSmartTvButton();
-            else removeById(SMART_TV_BUTTON_ID);
+            if (value) startGuideButton();
+            else stopGuideButton();
             break;
         case 'showMiniGuideButton':
-            if (value) setSmartTvMiniButton();
-            else removeById(SMART_TV_MINI_BUTTON_ID);
+            if (value) startMiniGuideButton();
+            else stopMiniGuideButton();
             break;
         case 'showPlayerButton':
-            if (value) setSmartTvPlayerButton();
-            else removeById(SMART_TV_PLAYER_BUTTON_ID);
+            if (value) startPlayerButton();
+            else stopPlayerButton();
             break;
     }
 };
@@ -54,13 +58,14 @@ const handleOptionChange = (key: OptionKey, value: boolean) => {
 const initialize = async () => {
     const { showGuideButton, showMiniGuideButton, showPlayerButton } = await getOptions();
 
-    if (showGuideButton) setSmartTvButton();
-    if (showMiniGuideButton) setSmartTvMiniButton();
-    if (showPlayerButton) setSmartTvPlayerButton();
+    if (showGuideButton) startGuideButton();
+    if (showMiniGuideButton) startMiniGuideButton();
+    if (showPlayerButton) startPlayerButton();
 };
 
-const setSmartTvButton = () =>
-    retryUntil(
+const startGuideButton = () => {
+    guideButtonRetry?.cancel();
+    guideButtonRetry = retryUntil(
         () => {
             const target = document.querySelector('#items.ytd-guide-section-renderer');
             if (!target) return false;
@@ -71,9 +76,11 @@ const setSmartTvButton = () =>
             observerRoot: document.querySelector('tp-yt-app-drawer') ?? document.body
         }
     );
+};
 
-const setSmartTvMiniButton = () =>
-    retryUntil(
+const startMiniGuideButton = () => {
+    miniGuideButtonRetry?.cancel();
+    miniGuideButtonRetry = retryUntil(
         () => {
             const target = document.querySelector('#items.ytd-mini-guide-renderer');
             if (!target) return false;
@@ -84,11 +91,32 @@ const setSmartTvMiniButton = () =>
             observerRoot: document.querySelector('ytd-mini-guide-renderer') ?? document.body
         }
     );
+};
 
-const setSmartTvPlayerButton = () =>
-    retryUntil(addSmartTvPlayerButton, {
+const startPlayerButton = () => {
+    playerButtonRetry?.cancel();
+    playerButtonRetry = retryUntil(addSmartTvPlayerButton, {
         observerRoot: document.querySelector('#player') ?? document.body
     });
+};
+
+const stopGuideButton = () => {
+    guideButtonRetry?.cancel();
+    guideButtonRetry = undefined;
+    removeById(SMART_TV_BUTTON_ID);
+};
+
+const stopMiniGuideButton = () => {
+    miniGuideButtonRetry?.cancel();
+    miniGuideButtonRetry = undefined;
+    removeById(SMART_TV_MINI_BUTTON_ID);
+};
+
+const stopPlayerButton = () => {
+    playerButtonRetry?.cancel();
+    playerButtonRetry = undefined;
+    removeById(SMART_TV_PLAYER_BUTTON_ID);
+};
 
 const removeById = (id: string) => document.getElementById(id)?.remove();
 
