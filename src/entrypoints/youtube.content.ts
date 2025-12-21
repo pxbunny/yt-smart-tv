@@ -12,15 +12,24 @@ export default defineContentScript({
     excludeMatches: ['https://*.youtube.com/tv*'],
     runAt: 'document_end',
     async main() {
-        browser.storage.onChanged.addListener(changes => {
-            Object.keys(changes).forEach(key => {
-                const value = changes[key].newValue;
-                if (typeof value !== 'boolean') return;
-                handleOptionChange(key as OptionKey, value);
-            });
+        browser.storage.onChanged.addListener((changes, areaName) => {
+            if (areaName !== 'sync') return;
+
+            for (const [key, change] of Object.entries(changes)) {
+                const { newValue } = change;
+                const acceptedKeys: OptionKey[] = [
+                    'showGuideButton',
+                    'showMiniGuideButton',
+                    'showPlayerButton'
+                ];
+
+                if (!acceptedKeys.includes(key as OptionKey)) continue;
+
+                handleOptionChange(key as OptionKey, newValue as boolean);
+            }
         });
 
-        setButtons();
+        initialize();
     }
 });
 
@@ -41,7 +50,7 @@ const handleOptionChange = (key: OptionKey, value: boolean) => {
     }
 };
 
-const setButtons = async () => {
+const initialize = async () => {
     const { showGuideButton, showMiniGuideButton, showPlayerButton } = await getOptions();
 
     if (showGuideButton) setSmartTvButton();

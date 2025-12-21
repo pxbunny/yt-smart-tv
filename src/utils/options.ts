@@ -12,11 +12,22 @@ export const defaultOptions: Options = {
     openInFullscreen: true
 };
 
+export const emptyOptions: Options = {
+    showGuideButton: false,
+    showMiniGuideButton: false,
+    showPlayerButton: false,
+    openInFullscreen: false
+};
+
 export type OptionKey = keyof Options;
 
+export const optionKeys = Object.keys(defaultOptions) as OptionKey[];
+
+export const isOptionKey = (value: string): boolean => optionKeys.includes(value as OptionKey);
+
 export const getOptions = async (): Promise<Options> => {
-    const options = await browser.storage.sync.get<Options>();
-    return { ...defaultOptions, ...options };
+    const stored = await browser.storage.sync.get(optionKeys);
+    return { ...defaultOptions, ...(stored as Partial<Options>) };
 };
 
 export const setOptions = async (options: Partial<Options>) => {
