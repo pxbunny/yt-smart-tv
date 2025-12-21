@@ -38,13 +38,13 @@
   <Section title="Buttons">
     <Option
       title="Sidebar button"
-      description='Adds a "Smart TV" entry in the left navigation menu.'
+      description='Add a "Smart TV" entry in the left navigation menu.'
       bind:checked={options.showGuideButton}
     />
 
     <Option
       title="Sidebar button (mini)"
-      description='Adds the "Smart TV" entry in the collapsed mini sidebar.'
+      description='Add a "Smart TV" entry in the collapsed mini sidebar.'
       bind:checked={options.showMiniGuideButton}
     />
 
@@ -58,7 +58,7 @@
   <Section title="Behavior">
     <Option
       title="Open Smart TV in fullscreen"
-      description="Open TV mode in a new fullscreen window."
+      description="Open TV mode in a fullscreen window."
       bind:checked={options.openInFullscreen}
     />
   </Section>
