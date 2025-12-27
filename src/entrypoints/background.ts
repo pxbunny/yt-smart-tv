@@ -1,6 +1,8 @@
 import { getUserAgentUpdateRuleOptions } from '~/dynamic-rules';
 
 export default defineBackground(() => {
+    const lazyOptions = new LazyOptions();
+
     browser.runtime.onInstalled.addListener(() => {
         browser.declarativeNetRequest.updateDynamicRules(getUserAgentUpdateRuleOptions());
     });
@@ -10,15 +12,15 @@ export default defineBackground(() => {
 
         switch (request) {
             case requests.OPEN_SMART_TV: {
-                const { openInFullscreen } = await lazyLoadOptions();
-                await openSmartTv('', isIncognito, openInFullscreen);
+                const options = await lazyOptions.get();
+                await openYouTubeTv('', options, isIncognito);
                 break;
             }
 
             case requests.OPEN_SMART_TV_WITH_URI: {
                 const uri = getYouTubeRelativeUri(sender.tab?.url);
-                const { openInFullscreen } = await lazyLoadOptions();
-                await openSmartTv(uri, isIncognito, openInFullscreen);
+                const options = await lazyOptions.get();
+                await openYouTubeTv(uri, options, isIncognito);
                 break;
             }
 
@@ -29,22 +31,4 @@ export default defineBackground(() => {
             }
         }
     });
-
-    browser.storage.onChanged.addListener((_, areaName) => {
-        if (areaName !== 'sync') return;
-        options = undefined; // force reload
-    });
 });
-
-let options: Options | undefined;
-
-const lazyLoadOptions = async (): Promise<Options> => (options ??= await getOptions());
-
-const openSmartTv = async (uri = '', incognito = false, fullscreen = true) => {
-    await browser.windows.create({
-        url: getYouTubeTvUrl(uri),
-        state: fullscreen ? 'fullscreen' : undefined,
-        focused: true,
-        incognito
-    });
-};

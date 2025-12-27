@@ -4,19 +4,23 @@
   import Section from '~/components/ui/section.svelte';
 
   const handleYouTubeClick = async () => {
-    await browser.tabs.create({ url: 'https://www.youtube.com/' });
+    await openYouTube();
     window.close();
   };
 
   const handleYouTubeTvClick = async () => {
-    await browser.tabs.create({ url: 'https://www.youtube.com/tv' });
+    const options = await lazyOptions.get();
+    const incognito = false;
+    await openYouTubeTv('', options, incognito);
     window.close();
   };
 
   const handleOptionsClick = async () => {
-    await browser.runtime.openOptionsPage();
+    await openOptions();
     window.close();
   };
+
+  const lazyOptions = new LazyOptions();
 </script>
 
 <main>
