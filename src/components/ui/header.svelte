@@ -4,14 +4,16 @@
   type Props = {
     title?: string;
     subtitle?: string;
+    size?: 'md' | 'sm';
   };
 
-  let { title = getExtensionName(), subtitle }: Props = $props();
+  let { title = getExtensionName(), subtitle, size = 'md' }: Props = $props();
+  let iconSize = $derived(size === 'sm' ? 22 : 28);
 </script>
 
-<header class="header">
+<header class="header" class:sm={size === 'sm'}>
   <div class="logo">
-    <ExtensionIcon width="28" height="28" color="#FF0000" />
+    <ExtensionIcon width={iconSize} height={iconSize} color="#FF0000" />
     <h1 class="title">{title}</h1>
   </div>
   {#if subtitle}
@@ -25,6 +27,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    &.sm {
+      .logo {
+        gap: 10px;
+      }
+
+      .title {
+        font-size: 20px;
+      }
+    }
   }
 
   .logo {

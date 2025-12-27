@@ -25,7 +25,7 @@
 </script>
 
 <main>
-  <Header />
+  <Header size="sm" />
 
   <Section>
     <Card
@@ -55,7 +55,7 @@
 
 <style lang="scss">
   main {
-    min-width: 360px;
+    min-width: 320px;
     padding: 16px 12px 8px;
     display: flex;
     flex-direction: column;
