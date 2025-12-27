@@ -70,13 +70,25 @@
       disabled={!hydrated}
     />
 
-    <Card
-      type="switch"
-      title="TV mode in fullscreen"
-      description="Open TV mode in a fullscreen window."
-      bind:checked={options.openInFullscreen}
-      disabled={!hydrated}
-    />
+    {#if options.openInNewWindow}
+      <Card
+        type="switch"
+        title="TV mode in fullscreen"
+        description="Open TV mode in a fullscreen window."
+        bind:checked={options.openInFullscreen}
+        disabled={!hydrated}
+      />
+    {:else}
+      <Card
+        type="switch"
+        title="TV mode in fullscreen"
+        description='Open TV mode in a fullscreen window.'
+        checked={false}
+        disabled
+      >
+        <p class="hint">ⓘ Enable “TV mode in new window” to use fullscreen.</p>
+      </Card>
+    {/if}
   </Section>
 </main>
 
@@ -92,5 +104,10 @@
     @media (max-width: 680px) {
       padding: 40px 12px;
     }
+  }
+
+  .hint {
+    color: var(--ytstv-muted);
+    font-size: 12px;
   }
 </style>
