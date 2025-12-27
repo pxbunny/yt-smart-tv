@@ -1,5 +1,6 @@
 <script lang="ts">
   import Card from '~/components/ui/card.svelte';
+  import Footer from '~/components/ui/footer.svelte';
   import Header from '~/components/ui/header.svelte';
   import Section from '~/components/ui/section.svelte';
 
@@ -48,12 +49,14 @@
       icon="settings"
     />
   </Section>
+
+  <Footer />
 </main>
 
 <style lang="scss">
   main {
     min-width: 360px;
-    padding: 16px 12px;
+    padding: 16px 12px 8px;
     display: flex;
     flex-direction: column;
     gap: 24px;

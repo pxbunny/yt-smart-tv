@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
 
   import Card from '~/components/ui/card.svelte';
+  import Footer from '~/components/ui/footer.svelte';
   import Header from '~/components/ui/header.svelte';
   import Section from '~/components/ui/section.svelte';
 
@@ -90,6 +91,8 @@
       </Card>
     {/if}
   </Section>
+
+  <Footer />
 </main>
 
 <style lang="scss">
