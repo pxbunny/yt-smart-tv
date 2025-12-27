@@ -2,7 +2,7 @@
   import { type Snippet } from 'svelte';
 
   type Props = {
-    title: string;
+    title?: string;
     children?: Snippet;
   };
 
@@ -10,7 +10,9 @@
 </script>
 
 <section class="section">
-  <h2 class="title">{title}</h2>
+  {#if title}
+    <h2 class="title">{title}</h2>
+  {/if}
   <div class="grid">
     {@render children?.()}
   </div>

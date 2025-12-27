@@ -1,52 +1,74 @@
 <script lang="ts">
   import { type Snippet } from 'svelte';
 
-  import Switch from '~/components/switch.svelte';
+  import Icon from './icon.svelte';
+  import Switch from './switch.svelte';
+
+  type IconType = 'external-link' | 'settings';
 
   type Props = {
     title: string;
     description?: string;
-    checked?: boolean;
     disabled?: boolean;
     children?: Snippet;
-  };
+  } & (
+    | { type: 'switch'; checked?: boolean; onclick?: never; icon?: never; }
+    | { type: 'button'; onclick: () => void; checked?: never; icon?: IconType; }
+  );
 
   let {
     title,
     description,
-    checked = $bindable(false),
+    children,
     disabled = false,
-    children
+    type,
+    checked = $bindable(false),
+    onclick,
+    icon
   }: Props = $props();
 </script>
 
-<label class="option" class:disabled>
-  <div class="text">
+{#snippet content(title: string, description?: string, children?: Snippet)}
+  <div class="content">
     <div class="title">{title}</div>
     {#if description}
       <div class="description">{description}</div>
     {/if}
     {@render children?.()}
   </div>
-  <div class="control">
-    <Switch bind:checked {disabled} />
-  </div>
-</label>
+{/snippet}
+
+{#if type === 'switch'}
+  <label class="card" class:disabled>
+    {@render content?.(title, description, children)}
+    <div class="actions">
+      <Switch bind:checked disabled={disabled} />
+    </div>
+  </label>
+{:else if type === 'button'}
+  <button class="card" class:disabled {onclick}>
+    {@render content?.(title, description, children)}
+    {#if icon}
+      <div class="actions">
+        <Icon type={icon} width="16" height="16" />
+      </div>
+    {/if}
+  </button>
+{/if}
 
 <style lang="scss">
-  .option {
+  .card {
     display: flex;
     justify-content: space-between;
     gap: 16px;
     padding: 12px 14px;
     border: 1px solid var(--ytstv-border);
     border-radius: 12px;
-    background: var(--ytstv-surface);
     cursor: pointer;
+    background: var(--ytstv-surface);
     transition:
       background-color var(--ytstv-transition-duration) ease-in-out,
       border-color var(--ytstv-transition-duration) ease-in-out,
-      transform var(--ytstv-transition-duration) ease-in-out,
       box-shadow var(--ytstv-transition-duration) ease-in-out;
 
     &:not(.disabled):hover {
@@ -68,14 +90,9 @@
         border-color: var(--ytstv-border);
         box-shadow: none;
       }
-
-      &:has(:focus-visible) {
-        border-color: var(--ytstv-accent);
-        box-shadow: 0 0 0 2px var(--ytstv-accent);
-      }
     }
 
-    .text {
+    .content {
       display: grid;
       gap: 4px;
     }
@@ -89,9 +106,10 @@
       font-size: 12px;
     }
 
-    .control {
+    .actions {
       display: flex;
       align-items: center;
+      color: var(--ytstv-muted);
     }
   }
 </style>

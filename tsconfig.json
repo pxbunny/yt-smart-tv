@@ -1,7 +1,4 @@
 {
   "extends": "./.wxt/tsconfig.json",
-  "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ESNext"]
-  },
   "exclude": ["node_modules", "dist"]
 }

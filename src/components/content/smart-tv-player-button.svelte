@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Icon from './icon.svelte';
+  import ExtensionIcon from '~/components/icons/extension.svelte';
 
   type Props = {
     id?: string;
@@ -17,5 +17,5 @@
   title={title}
   aria-label={title}
 >
-  <Icon width="24" height="24" color="white" />
+  <ExtensionIcon width="24" height="24" color="white" />
 </button>

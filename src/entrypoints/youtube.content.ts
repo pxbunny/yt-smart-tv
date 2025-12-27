@@ -1,7 +1,7 @@
 import { mount } from 'svelte';
 
-import SmartTvButton from '~/components/smart-tv-button.svelte';
-import SmartTvPlayerButton from '~/components/smart-tv-player-button.svelte';
+import SmartTvButton from '~/components/content/smart-tv-button.svelte';
+import SmartTvPlayerButton from '~/components/content/smart-tv-player-button.svelte';
 
 const SMART_TV_BUTTON_ID = 'smart-tv-button';
 const SMART_TV_MINI_BUTTON_ID = 'smart-tv-mini-button';
@@ -34,7 +34,7 @@ export default defineContentScript({
             }
         });
 
-        initialize();
+        await initialize();
     }
 });
 

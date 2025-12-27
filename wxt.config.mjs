@@ -10,7 +10,6 @@ export default defineConfig({
         version: '0.1.0',
         homepage_url: 'https://github.com/pxbunny/yt-smart-tv',
         permissions: ['declarativeNetRequest', 'storage'],
-        host_permissions: ['https://*.youtube.com/*'],
-        action: {}
+        host_permissions: ['https://*.youtube.com/*']
     }
 });

@@ -69,9 +69,11 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
    ```bash
    npm run build
    ```
-   This creates production builds in:
-   - Chromium: `dist/chrome-mv3/`
-   - Firefox: `dist/firefox-mv2/`
+   This creates production builds and ZIP packages in:
+   - Chromium (production build): `dist/chrome-mv3/`
+   - Firefox (production build): `dist/firefox-mv2/`
+   - Chromium (ZIP package): `dist/yt-smart-tv-*-chrome.zip`
+   - Firefox (ZIP package): `dist/yt-smart-tv-*-firefox.zip`
 
 4. Add the extension to your browser (choose one method):
 
@@ -97,7 +99,7 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
    <details>
    <summary><strong>Firefox: Install from ZIP/XPI (persistent)</strong></summary>
 
-   - Build a ZIP package: `npm run zip:firefox` (outputs `dist/yt-smart-tv-*-firefox.zip`).
+   - Find the ZIP package in `dist/yt-smart-tv-*-firefox.zip`.
    - Rename the file from `.zip` to `.xpi` (Firefox add-ons are ZIP files).
    - Open [`about:addons`](about:addons) -> gear icon -> **Install Add-on From File...** -> select the `.xpi`.
    - Note: On stable Firefox, unsigned add-ons may be blocked. For permanent installs, use a signed build (AMO) or Firefox Developer Edition/Nightly (with signing disabled).
@@ -151,7 +153,7 @@ You can pair your phone with YouTube running in TV mode and use it as a remote c
 
 - The extension does not collect, store, or transmit personal data.
 - All functionality runs locally in your browser.
-- Uses minimal permissions required to inject the UI controls and apply a User-Agent override for `youtube.com/tv` (via `declarativeNetRequest`).
+- Uses minimal permissions required to store settings and apply a User-Agent override for `youtube.com/tv` (via `declarativeNetRequest`).
 
 ## 📄 License
 

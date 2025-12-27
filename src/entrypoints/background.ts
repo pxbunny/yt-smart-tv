@@ -24,15 +24,10 @@ export default defineBackground(() => {
 
             case requests.CLOSE_SMART_TV: {
                 const tabId = sender.tab?.id;
-                if (tabId != null) browser.tabs.remove(tabId);
+                if (tabId) browser.tabs.remove(tabId);
                 break;
             }
         }
-    });
-
-    browser.action.onClicked.addListener(async () => {
-        const { openInFullscreen } = await lazyLoadOptions();
-        await openSmartTv('', false, openInFullscreen);
     });
 
     browser.storage.onChanged.addListener((_, areaName) => {
