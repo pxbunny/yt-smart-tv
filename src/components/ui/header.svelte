@@ -6,7 +6,7 @@
     subtitle?: string;
   };
 
-  let { title = 'YouTube Smart TV', subtitle }: Props = $props();
+  let { title = getExtensionName(), subtitle }: Props = $props();
 </script>
 
 <header class="header">
