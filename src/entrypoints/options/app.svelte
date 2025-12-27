@@ -64,7 +64,7 @@
   <Section title="Behavior">
     <Card
       type="switch"
-      title="Open Smart TV in new window"
+      title="TV mode in new window"
       description="Open TV mode in a new window."
       bind:checked={options.openInNewWindow}
       disabled={!hydrated}
@@ -72,7 +72,7 @@
 
     <Card
       type="switch"
-      title="Open Smart TV in fullscreen"
+      title="TV mode in fullscreen"
       description="Open TV mode in a fullscreen window."
       bind:checked={options.openInFullscreen}
       disabled={!hydrated}
