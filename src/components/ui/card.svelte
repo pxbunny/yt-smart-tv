@@ -80,16 +80,9 @@
       cursor: not-allowed;
     }
 
-    &:focus-within {
-      border-color: var(--ytstv-accent);
-      box-shadow: 0 0 0 2px var(--ytstv-accent);
-    }
-
-    @supports selector(.option:has(:focus-visible)) {
-      &:focus-within {
-        border-color: var(--ytstv-border);
-        box-shadow: none;
-      }
+    &:focus-visible {
+      outline: 2px solid var(--ytstv-accent);
+      outline-offset: 2px;
     }
 
     .content {
