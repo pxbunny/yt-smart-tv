@@ -87,7 +87,7 @@
         checked={false}
         disabled
       >
-        <p class="hint">ⓘ Enable “TV mode in new window” to use fullscreen.</p>
+        <p class="hint">ⓘ Enable "TV mode in new window" to use fullscreen.</p>
       </Card>
     {/if}
   </Section>
