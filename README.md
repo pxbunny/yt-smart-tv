@@ -45,17 +45,53 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 
 ## ⚙️ Options
 
-<table>
+<table align="center">
   <tr>
-    <td>
-      <img src="assets/screenshot-options.png" alt="Options page" width="500" />
+    <td valign="middle" align="center" width="50%">
+      <img src="assets/screenshot-options.png" alt="Options page" />
     </td>
-    <td>
+    <td valign="middle" align="left" width="50%">
       <p>The extension includes an options page where you can tweak its behavior and which buttons are shown.</p>
       <p>To open the options page, open the extension popup and click <strong>Open extension options</strong>.</p>
     </td>
   </tr>
 </table>
+
+## ▶️ Usage
+
+1. Open a regular YouTube page.
+2. Click **Smart TV** from the left menu or the TV icon near the fullscreen button.
+3. YouTube opens in TV mode (in a new window or tab, depending on your options). Press `Esc` inside TV mode to leave.
+
+> Note: `Esc` closes the Smart TV window/tab only when YouTube shows the exit overlay (the one with buttons like "Exit" / "Back"). In some cases (especially when you're not logged in), YouTube may show a sign-in screen instead and `Esc` won't work. If that happens, exit fullscreen manually and close the Smart TV window/tab yourself.
+
+## 📱 Link your phone with a TV code
+
+You can pair your phone with YouTube running in TV mode and use it as a remote control.
+
+1. Open YouTube TV mode.
+2. Go to **Settings > Link TV & Phone > Link with TV code**.
+3. Follow the on-screen steps to finish pairing.
+
+> After pairing, you can queue videos, control playback/volume, and browse from your phone while the TV UI plays on your computer.
+
+<p align="center"><img src="assets/screenshot-tv-code.png" alt="TV code" /></p>
+
+## 🕵️ Incognito / Private mode
+
+To use the extension from an incognito/private window (and open Smart TV in that mode), you need to enable it in the browser settings.
+
+### Chromium (Incognito)
+
+1. Open [`chrome://extensions`](chrome://extensions).
+2. Find **YouTube Smart TV** and open **Details**.
+3. Enable **Allow in Incognito**.
+
+### Firefox (Private Windows)
+
+1. Open [`about:addons`](about:addons).
+2. Go to **Extensions** -> **YouTube Smart TV**.
+3. Set **Run in Private Windows** to **Allow**.
 
 ## 📦 Installation (from source)
 
@@ -88,7 +124,6 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
    - Firefox (ZIP package): `dist/yt-smart-tv-*-firefox.zip`
 
 4. Add the extension to your browser (choose one method):
-
    <details>
    <summary><strong>Chromium: Load unpacked</strong></summary>
 
@@ -118,48 +153,12 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 
    </details>
 
-## 🕵️ Incognito / Private mode
-
-To use the extension from an incognito/private window (and open Smart TV in that mode), you need to enable it in the browser settings.
-
-### Chromium (Incognito)
-
-1. Open [`chrome://extensions`](chrome://extensions).
-2. Find **YouTube Smart TV** and open **Details**.
-3. Enable **Allow in Incognito**.
-
-### Firefox (Private Windows)
-
-1. Open [`about:addons`](about:addons).
-2. Go to **Extensions** -> **YouTube Smart TV**.
-3. Set **Run in Private Windows** to **Allow**.
-
 ## 🛠️ Development
 
 Run the extension in dev mode:
 
 - Chromium: `npm run dev:chrome`
 - Firefox: `npm run dev:firefox`
-
-## ▶️ Usage
-
-1. Open a regular YouTube page.
-2. Click **Smart TV** from the left menu or the TV icon near the fullscreen button.
-3. YouTube opens in TV mode in a new window. Press `Esc` inside TV mode to leave.
-
-> Note: `Esc` closes the Smart TV window only when YouTube shows the exit overlay (the one with buttons like “Exit” / “Back”). In some cases (especially when you’re not logged in), YouTube may show a sign-in screen instead and `Esc` won’t work. If that happens, exit fullscreen manually and close the Smart TV window yourself.
-
-## 📱 Link your phone with a TV code
-
-You can pair your phone with YouTube running in TV mode and use it as a remote control.
-
-1. Open YouTube TV mode.
-2. Go to **Settings > Link TV & Phone > Link with TV code**.
-3. Follow the on-screen steps to finish pairing.
-
-> After pairing, you can queue videos, control playback/volume, and browse from your phone while the TV UI plays on your computer.
-
-<p align="center"><img src="assets/screenshot-tv-code.png" alt="TV code" /></p>
 
 ## 🔒 Privacy & permissions
 
