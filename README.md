@@ -37,13 +37,25 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 - Player button resumes the current video at the same timestamp in TV mode.
 - Works entirely client-side; no data leaves your browser.
 
-<a id="compatibility"></a>
-
 ## ✅ Compatibility
 
 - Google Chrome
 - Mozilla Firefox
 - Microsoft Edge, Brave, Vivaldi, and other Chromium-based browsers
+
+## ⚙️ Options
+
+<table>
+  <tr>
+    <td>
+      <img src="assets/screenshot-options.png" alt="Options page" height="260" />
+    </td>
+    <td>
+      <p>The extension includes an options page where you can tweak its behavior and which buttons are shown.</p>
+      <p>To open the options page, open the extension popup and click <strong>Open extension options</strong>.</p>
+    </td>
+  </tr>
+</table>
 
 ## 📦 Installation (from source)
 
