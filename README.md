@@ -9,6 +9,10 @@
   <a href="https://github.com/pxbunny/yt-smart-tv/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/pxbunny/yt-smart-tv/ci.yml?label=Build" alt="CI" /></a>
 </p>
 
+This extension hasn’t been published yet. For now, you can install it by building it from source — see [Installation (from source)](#-installation-from-source).
+
+---
+
 A lightweight browser extension that adds an **Open in TV mode** control to YouTube. It integrates with the standard YouTube layout by adding:
 
 - a button in the left navigation menu
@@ -98,7 +102,7 @@ To use the extension from an incognito/private window (and open Smart TV in that
 ### Requirements
 
 - **Node.js** 20+
-- A compatible browser (see [Compatibility](#compatibility))
+- A compatible browser (see [Compatibility](#-compatibility))
 
 ### Steps
 
