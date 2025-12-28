@@ -48,7 +48,7 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 <table>
   <tr>
     <td>
-      <img src="assets/screenshot-options.png" alt="Options page" height="260" />
+      <img src="assets/screenshot-options.png" alt="Options page" width="500" />
     </td>
     <td>
       <p>The extension includes an options page where you can tweak its behavior and which buttons are shown.</p>
