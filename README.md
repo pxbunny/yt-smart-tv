@@ -1,45 +1,44 @@
-<p align="center">
-  <img src="assets/logo.svg" alt="YouTube Smart TV logo" width="128" />
-</p>
+<h1 align="center">
+  <sub><img src="assets/logo.svg" alt="YouTube Smart TV logo" height="32"></sub>
+  YouTube Smart TV - Browser Extension
+</h1>
 
-<h1 align="center">YouTube Smart TV Browser Extension</h1>
-
-<p align="center">
+<div align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL-3.0" /></a>
   <a href="https://github.com/pxbunny/yt-smart-tv/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/pxbunny/yt-smart-tv/ci.yml?label=Build" alt="CI" /></a>
-</p>
+</div>
 
-This extension hasn’t been published yet. For now, you can install it by building it from source — see [Installation (from source)](#-installation-from-source).
-
----
+| Browser | Source | Info |
+| :---: | --- | --- |
+| <img src="https://github.com/user-attachments/assets/5463ef88-873b-4516-8514-5277664cfde7" alt="Chromium"> | Chrome&nbsp;Web&nbsp;Store | Not published yet |
+| <img src="https://github.com/user-attachments/assets/b0136512-56a5-4856-8c50-4971c957a24f" alt="Firefox"> | Firefox&nbsp;Add-ons | Not published yet |
+| | Source&nbsp;code | You can always build and install the extension from source — see the instructions in [Installation (from source)](#-installation-from-source). |
 
 A lightweight browser extension that adds an **Open in TV mode** control to YouTube. It integrates with the standard YouTube layout by adding:
 
-- a button in the left navigation menu
-- a button next to the fullscreen control on the player
+- a button in the left navigation menu,
+- a button next to the fullscreen control on the player,
 
 so you can quickly switch to the **YouTube TV** UI and control playback from your phone.
 
-<table align="center">
-  <tr>
-    <td valign="middle" align="center">
-      <img src="assets/screenshot-navigation.png" alt="Sidebar navigation button" height="180" />
-    </td>
-    <td align="center">
-      <img src="assets/screenshot-navigation-mini.png" alt="Sidebar navigation button (mini)" height="180" />
-    </td>
-    <td valign="middle" align="center">
-      <img src="assets/screenshot-player.png" alt="Player control button" width="260" />
-    </td>
-  </tr>
-</table>
+---
+
+- [Features](#-features)
+- [Compatibility](#-compatibility)
+- [Usage](#%EF%B8%8F-usage)
+- [Link your phone with a TV code](#-link-your-phone-with-a-tv-code)
+- [Incognito / Private mode](#%EF%B8%8F-incognito--private-mode)
+- [Installation (from source)](#-installation-from-source)
+- [Development](#%EF%B8%8F-development)
+
+---
 
 ## ✨ Features
 
 - One-click switch to **YouTube TV** (`https://www.youtube.com/tv`).
 - Buttons integrated into the YouTube interface (sidebar + player controls).
 - Player button resumes the current video at the same timestamp in TV mode.
-- Works entirely client-side; no data leaves your browser.
+- Options page to customize which buttons are shown and how TV mode opens (window/tab, fullscreen).
 
 ## ✅ Compatibility
 
@@ -47,27 +46,15 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 - Mozilla Firefox
 - Microsoft Edge, Brave, Vivaldi, and other Chromium-based browsers
 
-## ⚙️ Options
-
-<table align="center">
-  <tr>
-    <td valign="middle" align="center" width="50%">
-      <img src="assets/screenshot-options.png" alt="Options page" />
-    </td>
-    <td valign="middle" align="left" width="50%">
-      <p>The extension includes an options page where you can tweak its behavior and which buttons are shown.</p>
-      <p>To open the options page, open the extension popup and click <strong>Open extension options</strong>.</p>
-    </td>
-  </tr>
-</table>
-
 ## ▶️ Usage
 
 1. Open a regular YouTube page.
 2. Click **Smart TV** from the left menu or the TV icon near the fullscreen button.
 3. YouTube opens in TV mode (in a new window or tab, depending on your options). Press `Esc` inside TV mode to leave.
 
-> Note: `Esc` closes the Smart TV window/tab only when YouTube shows the exit overlay (the one with buttons like "Exit" / "Back"). In some cases (especially when you're not logged in), YouTube may show a sign-in screen instead and `Esc` won't work. If that happens, exit fullscreen manually and close the Smart TV window/tab yourself.
+> Note: `Esc` closes the Smart TV window/tab only when YouTube shows the exit overlay (the one with buttons like "Exit" / "Back").
+> In some cases (especially when you're not logged in), YouTube may show a sign-in screen instead and `Esc` won't work.
+> If that happens, exit fullscreen manually and close the Smart TV window/tab yourself.
 
 ## 📱 Link your phone with a TV code
 
@@ -150,8 +137,8 @@ To use the extension from an incognito/private window (and open Smart TV in that
    <details>
    <summary><strong>Firefox: Install from ZIP/XPI (persistent)</strong></summary>
 
-   - Find the ZIP package in `dist/yt-smart-tv-*-firefox.zip`.
-   - Rename the file from `.zip` to `.xpi` (Firefox add-ons are ZIP files).
+   - Find the ZIP package: `dist/yt-smart-tv-*-firefox.zip`.
+   - Rename the file from `.zip` to `.xpi`.
    - Open [`about:addons`](about:addons) -> gear icon -> **Install Add-on From File...** -> select the `.xpi`.
    - Note: On stable Firefox, unsigned add-ons may be blocked. For permanent installs, use a signed build (AMO) or Firefox Developer Edition/Nightly (with signing disabled).
 
@@ -163,13 +150,3 @@ Run the extension in dev mode:
 
 - Chromium: `npm run dev:chrome`
 - Firefox: `npm run dev:firefox`
-
-## 🔒 Privacy & permissions
-
-- The extension does not collect, store, or transmit personal data.
-- All functionality runs locally in your browser.
-- Uses minimal permissions required to store settings and apply a User-Agent override for `youtube.com/tv` (via `declarativeNetRequest`).
-
-## 📄 License
-
-Licensed under the **GNU GPLv3**. See [`LICENSE`](LICENSE) for details.
