@@ -55,7 +55,6 @@
 
   a {
     color: var(--ytstv-muted);
-    transition: color var(--ytstv-transition-duration) ease-in-out;
 
     &:hover {
       color: var(--ytstv-fg);

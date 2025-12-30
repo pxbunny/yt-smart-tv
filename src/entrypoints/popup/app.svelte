@@ -55,10 +55,10 @@
 
 <style lang="scss">
   main {
-    min-width: 320px;
-    padding: 16px 12px 8px;
+    min-width: 340px;
+    padding: 18px 12px 8px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
 </style>

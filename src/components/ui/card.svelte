@@ -103,6 +103,11 @@
       display: flex;
       align-items: center;
       color: var(--ytstv-muted);
+      transition: color var(--ytstv-transition-duration) ease-in-out;
+    }
+
+    &:hover .actions {
+      color: var(--ytstv-fg);
     }
   }
 </style>
