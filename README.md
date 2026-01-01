@@ -5,6 +5,7 @@
 
 <div align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL-3.0" /></a>
+  <a href="https://github.com/pxbunny/yt-smart-tv/releases"><img src="https://img.shields.io/github/v/release/pxbunny/yt-smart-tv?label=Release" alt="Release" /></a>
   <a href="https://github.com/pxbunny/yt-smart-tv/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/pxbunny/yt-smart-tv/ci.yml?label=Build" alt="CI" /></a>
 </div>
 
@@ -26,11 +27,27 @@
     <td>Not published yet</td>
   </tr>
   <tr>
+    <td align="center">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/github-mark-white.svg" width="48" height="48" />
+        <source media="(prefers-color-scheme: light)" srcset="assets/github-mark.svg" width="48" height="48" />
+        <img src="assets/github-mark.svg" width="48" height="48" />
+      </picture>
+    </td>
+    <td><a href="https://github.com/pxbunny/yt-smart-tv/releases">Releases</a></td>
     <td>
+      Download a pre-built package. See <a href="#-installation-from-release">Installation (from release)</a>.
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
       <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/node.js/node.js_48x48.png" alt="Source code" />
     </td>
     <td>Source&nbsp;code</td>
-    <td>You can always build and install the extension from source — see the instructions in <a href="#-installation-from-source">Installation (from source)</a>.</td>
+    <td>
+      You can always build and install the extension from source — see the instructions
+      in <a href="#-installation-from-source">Installation (from source)</a>.
+    </td>
   </tr>
 </table>
 
@@ -43,6 +60,7 @@
 - 🚀 [Usage](#-usage)
 - 📱 [Link your phone with a TV code](#-link-your-phone-with-a-tv-code)
 - 🤫 [Incognito / Private mode](#-incognito--private-mode)
+- 📦 [Installation (from release)](#-installation-from-release)
 - 📦 [Installation (from source)](#-installation-from-source)
 - 🔧 [Development](#-development)
 
@@ -98,6 +116,33 @@ To use the extension from an incognito/private window (and open Smart TV in that
 1. Open `about:addons`.
 2. Go to **Extensions** → **YouTube Smart TV**.
 3. Set **Run in Private Windows** to **Allow**.
+
+## 📦 Installation (from release)
+
+1. Go to [Releases](https://github.com/pxbunny/yt-smart-tv/releases) and open the latest one.
+2. Download the ZIP package for your browser:
+   - Chromium: `yt-smart-tv-*-chrome.zip`
+   - Firefox: `yt-smart-tv-*-firefox.zip`
+3. Add the extension to your browser:
+
+   <details>
+   <summary><strong>Chromium</strong></summary>
+
+   - Unzip `yt-smart-tv-*-chrome.zip`.
+   - Open `chrome://extensions`.
+   - Enable **Developer mode** (top-right).
+   - Click **Load unpacked** and select the extracted folder.
+
+   </details>
+
+   <details>
+   <summary><strong>Firefox</strong></summary>
+
+   - Rename the file from `.zip` to `.xpi`.
+   - Open [`about:addons`](about:addons) -> gear icon -> **Install Add-on From File...** -> select the `.xpi`.
+   - Note: On stable Firefox, unsigned add-ons may be blocked. For permanent installs, use a signed build (AMO) or Firefox Developer Edition/Nightly (with signing disabled).
+
+   </details>
 
 ## 📦 Installation (from source)
 
