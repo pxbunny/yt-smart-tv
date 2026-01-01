@@ -26,20 +26,17 @@
     <td>Not published yet</td>
   </tr>
   <tr>
-    <td></td>
+    <td>
+      <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/node.js/node.js_48x48.png" alt="Source code" />
+    </td>
     <td>Source&nbsp;code</td>
     <td>You can always build and install the extension from source — see the instructions in <a href="#-installation-from-source">Installation (from source)</a>.</td>
   </tr>
 </table>
 
-A lightweight browser extension that adds an **Open in TV mode** control to YouTube. It integrates with the standard YouTube layout by adding:
-
-- a button in the left navigation menu,
-- a button next to the fullscreen control on the player,
-
-so you can quickly switch to the **YouTube TV** UI and control playback from your phone.
-
----
+> A lightweight browser extension that adds **Smart TV** controls to YouTube. It integrates with the standard layout
+> by inserting buttons into the **left sidebar** and **player controls** (next to the fullscreen button),
+> so you can open **YouTube TV** with one click and control playback from your phone after pairing (TV code).
 
 - ✨ [Features](#-features)
 - ✅ [Compatibility](#-compatibility)
@@ -55,7 +52,7 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 
 - One-click switch to **YouTube TV** (`https://www.youtube.com/tv`).
 - Buttons integrated into the YouTube interface (sidebar + player controls).
-- Player button resumes the current video at the same timestamp in TV mode.
+- Player button opens TV mode **at the same video and timestamp**.
 - Options page to customize which buttons are shown and how TV mode opens (window/tab, fullscreen).
 
 ## ✅ Compatibility
@@ -67,8 +64,8 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 ## 🚀 Usage
 
 1. Open a regular YouTube page.
-2. Click **Smart TV** from the left menu or the TV icon near the fullscreen button.
-3. YouTube opens in TV mode (in a new window or tab, depending on your options). Press `Esc` inside TV mode to leave.
+2. Click **Smart TV** in the left menu or the TV icon near the fullscreen button.
+3. YouTube opens in TV mode (in a new tab or window, depending on your options). Press `Esc` inside TV mode to leave.
 
 > Note: `Esc` closes the Smart TV window/tab only when YouTube shows the exit overlay (the one with buttons like "Exit" / "Back").
 > In some cases (especially when you're not logged in), YouTube may show a sign-in screen instead and `Esc` won't work.
@@ -78,8 +75,8 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 
 You can pair your phone with YouTube running in TV mode and use it as a remote control.
 
-1. Open YouTube TV mode.
-2. Go to **Settings > Link TV & Phone > Link with TV code**.
+1. Open YouTube in TV mode.
+2. Go to **Settings → Link TV & phone → Link with TV code**.
 3. Follow the on-screen steps to finish pairing.
 
 > After pairing, you can queue videos, control playback/volume, and browse from your phone while the TV UI plays on your computer.
@@ -92,14 +89,14 @@ To use the extension from an incognito/private window (and open Smart TV in that
 
 ### Chromium (Incognito)
 
-1. Open [`chrome://extensions`](chrome://extensions).
-2. Find **YouTube Smart TV** and open **Details**.
+1. Open `chrome://extensions`.
+2. Find **YouTube Smart TV** → **Details**.
 3. Enable **Allow in Incognito**.
 
 ### Firefox (Private Windows)
 
-1. Open [`about:addons`](about:addons).
-2. Go to **Extensions** -> **YouTube Smart TV**.
+1. Open `about:addons`.
+2. Go to **Extensions** → **YouTube Smart TV**.
 3. Set **Run in Private Windows** to **Allow**.
 
 ## 📦 Installation (from source)
