@@ -8,6 +8,8 @@
   <a href="https://github.com/pxbunny/yt-smart-tv/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/pxbunny/yt-smart-tv/ci.yml?label=Build" alt="CI" /></a>
 </div>
 
+<br/>
+
 | Browser | Source | Info |
 | :---: | --- | --- |
 | <img src="https://github.com/user-attachments/assets/5463ef88-873b-4516-8514-5277664cfde7" alt="Chromium"> | Chrome&nbsp;Web&nbsp;Store | Not published yet |
@@ -23,13 +25,13 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 
 ---
 
-- [Features](#-features)
-- [Compatibility](#-compatibility)
-- [Usage](#%EF%B8%8F-usage)
-- [Link your phone with a TV code](#-link-your-phone-with-a-tv-code)
-- [Incognito / Private mode](#%EF%B8%8F-incognito--private-mode)
-- [Installation (from source)](#-installation-from-source)
-- [Development](#%EF%B8%8F-development)
+- ✨ [Features](#-features)
+- ✅ [Compatibility](#-compatibility)
+- 🚀 [Usage](#-usage)
+- 📱 [Link your phone with a TV code](#-link-your-phone-with-a-tv-code)
+- 🤫 [Incognito / Private mode](#-incognito--private-mode)
+- 📦 [Installation (from source)](#-installation-from-source)
+- 🔧 [Development](#-development)
 
 ---
 
@@ -46,7 +48,7 @@ so you can quickly switch to the **YouTube TV** UI and control playback from you
 - Mozilla Firefox
 - Microsoft Edge, Brave, Vivaldi, and other Chromium-based browsers
 
-## ▶️ Usage
+## 🚀 Usage
 
 1. Open a regular YouTube page.
 2. Click **Smart TV** from the left menu or the TV icon near the fullscreen button.
@@ -68,7 +70,7 @@ You can pair your phone with YouTube running in TV mode and use it as a remote c
 
 <p align="center"><img src="assets/screenshot-tv-code.png" alt="TV code" /></p>
 
-## 🕵️ Incognito / Private mode
+## 🤫 Incognito / Private mode
 
 To use the extension from an incognito/private window (and open Smart TV in that mode), you need to enable it in the browser settings.
 
@@ -144,7 +146,7 @@ To use the extension from an incognito/private window (and open Smart TV in that
 
    </details>
 
-## 🛠️ Development
+## 🔧 Development
 
 Run the extension in dev mode:
 
