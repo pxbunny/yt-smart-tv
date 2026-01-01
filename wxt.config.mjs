@@ -7,7 +7,7 @@ export default defineConfig({
     manifest: {
         name: 'YouTube Smart TV',
         description: 'One-click launcher for the TV version of YouTube.',
-        version: '0.1.0',
+        version: '1.0.0',
         homepage_url: 'https://github.com/pxbunny/yt-smart-tv',
         permissions: ['declarativeNetRequest', 'storage'],
         host_permissions: ['https://*.youtube.com/*']
