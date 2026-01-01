@@ -10,11 +10,27 @@
 
 <br/>
 
-| Browser | Source | Info |
-| :---: | --- | --- |
-| <img src="https://github.com/user-attachments/assets/5463ef88-873b-4516-8514-5277664cfde7" alt="Chromium"> | Chrome&nbsp;Web&nbsp;Store | Not published yet |
-| <img src="https://github.com/user-attachments/assets/b0136512-56a5-4856-8c50-4971c957a24f" alt="Firefox"> | Firefox&nbsp;Add-ons | Not published yet |
-| | Source&nbsp;code | You can always build and install the extension from source — see the instructions in [Installation (from source)](#-installation-from-source). |
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/chrome/chrome_48x48.png" alt="Chromium" />
+    </td>
+    <td>Chrome&nbsp;Web&nbsp;Store</td>
+    <td>Not published yet</td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/75.0.1/firefox/firefox_48x48.png" alt="Firefox" />
+    </td>
+    <td>Firefox&nbsp;Add-ons</td>
+    <td>Not published yet</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Source&nbsp;code</td>
+    <td>You can always build and install the extension from source — see the instructions in <a href="#-installation-from-source">Installation (from source)</a>.</td>
+  </tr>
+</table>
 
 A lightweight browser extension that adds an **Open in TV mode** control to YouTube. It integrates with the standard YouTube layout by adding:
 
