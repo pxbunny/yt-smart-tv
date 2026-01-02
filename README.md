@@ -85,7 +85,7 @@
 2. Click **Smart TV** in the left menu or the TV icon near the fullscreen button.
 3. YouTube opens in TV mode (in a new tab or window, depending on your options). Press `Esc` inside TV mode to leave.
 
-> Note: `Esc` closes the Smart TV window/tab only when YouTube shows the exit overlay (the one with buttons like "Exit" / "Back").
+> **Note:** `Esc` closes the Smart TV window/tab only when YouTube shows the exit overlay (the one with buttons like "Exit" / "Back").
 > In some cases (especially when you're not logged in), YouTube may show a sign-in screen instead and `Esc` won't work.
 > If that happens, exit fullscreen manually and close the Smart TV window/tab yourself.
 
@@ -140,7 +140,7 @@ To use the extension from an incognito/private window (and open Smart TV in that
 
    - Rename the file from `.zip` to `.xpi`.
    - Open [`about:addons`](about:addons) -> gear icon -> **Install Add-on From File...** -> select the `.xpi`.
-   - Note: On stable Firefox, unsigned add-ons may be blocked. For permanent installs, use a signed build (AMO) or Firefox Developer Edition/Nightly (with signing disabled).
+   - **Note:** On stable Firefox, unsigned add-ons may be blocked. For permanent installs, use a signed build (AMO) or Firefox Developer Edition/Nightly (with signing disabled).
 
    </details>
 
@@ -190,7 +190,7 @@ To use the extension from an incognito/private window (and open Smart TV in that
    - Open [`about:debugging#/runtime/this-firefox`](about:debugging#/runtime/this-firefox).
    - Click **Load Temporary Add-on...**
    - Select `dist/firefox-mv2/manifest.json`.
-   - Note: Temporary add-ons are removed when Firefox is closed/restarted (they are intended for development).
+   - **Note:** Temporary add-ons are removed when Firefox is closed/restarted (they are intended for development).
 
    </details>
 
@@ -200,7 +200,7 @@ To use the extension from an incognito/private window (and open Smart TV in that
    - Find the ZIP package: `dist/yt-smart-tv-*-firefox.zip`.
    - Rename the file from `.zip` to `.xpi`.
    - Open [`about:addons`](about:addons) -> gear icon -> **Install Add-on From File...** -> select the `.xpi`.
-   - Note: On stable Firefox, unsigned add-ons may be blocked. For permanent installs, use a signed build (AMO) or Firefox Developer Edition/Nightly (with signing disabled).
+   - **Note:** On stable Firefox, unsigned add-ons may be blocked. For permanent installs, use a signed build (AMO) or Firefox Developer Edition/Nightly (with signing disabled).
 
    </details>
 
