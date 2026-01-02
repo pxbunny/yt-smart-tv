@@ -7,22 +7,22 @@ import tseslint from 'typescript-eslint';
 import autoImports from './.wxt/eslint-auto-imports.mjs';
 
 export default defineConfig(
-    autoImports,
-    {
-        ignores: ['node_modules/', '.wxt/', 'dist/', '**/*.g.ts']
+  autoImports,
+  {
+    ignores: ['node_modules/', '.wxt/', 'dist/', '**/*.g.ts']
+  },
+  eslint.configs.recommended,
+  tseslint.configs.strict,
+  tseslint.configs.stylistic,
+  eslintConfigPrettier,
+  {
+    plugins: {
+      'simple-import-sort': simpleImportSort
     },
-    eslint.configs.recommended,
-    tseslint.configs.strict,
-    tseslint.configs.stylistic,
-    eslintConfigPrettier,
-    {
-        plugins: {
-            'simple-import-sort': simpleImportSort
-        },
-        rules: {
-            "@typescript-eslint/no-non-null-assertion": "off",
-            'simple-import-sort/exports': 'warn',
-            'simple-import-sort/imports': 'warn'
-        }
+    rules: {
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      'simple-import-sort/exports': 'warn',
+      'simple-import-sort/imports': 'warn'
     }
+  }
 );
