@@ -1,3 +1,10 @@
+/**
+ * Opens YouTube TV either in a new window or a new tab.
+ *
+ * @param uri - Optional relative URI to open (e.g. `/watch?v=...` or `?v=...`).
+ * @param options - Behavior options controlling window/tab mode.
+ * @param incognito - Whether to open the window in incognito/private mode (only applies to window mode).
+ */
 export async function openYouTubeTv(uri = '', options: BehaviorOptions, incognito = false) {
   const { openInNewWindow, openInFullscreen } = options;
 
@@ -23,10 +30,16 @@ export async function openYouTubeTv(uri = '', options: BehaviorOptions, incognit
   await openYouTubeTvInNewTab();
 }
 
+/**
+ * Opens `https://www.youtube.com/` in a new tab.
+ */
 export async function openYouTube() {
   await browser.tabs.create({ url: 'https://www.youtube.com/' });
 }
 
+/**
+ * Opens the extension options page.
+ */
 export async function openOptions() {
   await browser.runtime.openOptionsPage();
 }

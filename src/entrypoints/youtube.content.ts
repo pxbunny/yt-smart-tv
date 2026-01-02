@@ -17,6 +17,13 @@ let guideButtonRetry: RetryHandle | undefined;
 let miniGuideButtonRetry: RetryHandle | undefined;
 let playerButtonRetry: RetryHandle | undefined;
 
+/**
+ * Content script entrypoint for regular YouTube pages (not `/tv`).
+ *
+ * @remarks
+ * Injects "Smart TV" buttons into different parts of the YouTube UI and reacts to option changes
+ * via `browser.storage.onChanged`.
+ */
 export default defineContentScript({
   matches: ['https://*.youtube.com/*'],
   excludeMatches: ['https://*.youtube.com/tv*'],

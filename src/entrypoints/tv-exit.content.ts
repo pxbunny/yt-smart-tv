@@ -2,6 +2,13 @@ const OVERLAY_SELECTOR = 'yt-unified-overlay-stage';
 const TEXT_ELEMENT_SELECTOR = 'yt-formatted-string';
 const EXIT_HEADER_CONTENT = 'Exit YouTube';
 
+/**
+ * Content script entrypoint for YouTube TV pages (`/tv`).
+ *
+ * @remarks
+ * Watches for the "Exit YouTube" overlay. When it appears, it sends a message to the background
+ * script to close the TV window.
+ */
 export default defineContentScript({
   matches: ['https://*.youtube.com/tv*'],
   runAt: 'document_end',

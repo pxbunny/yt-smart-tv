@@ -1,5 +1,12 @@
 import { getUserAgentUpdateRuleOptions } from '~/dynamic-rules';
 
+/**
+ * Background entrypoint.
+ *
+ * @remarks
+ * - Installs a Declarative Net Request rule to set a custom User-Agent for `youtube.com/tv`.
+ * - Handles runtime messages from content scripts (open/close Smart TV window).
+ */
 export default defineBackground(() => {
   const lazyOptions = new LazyOptions();
 
