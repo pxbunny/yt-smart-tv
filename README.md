@@ -29,9 +29,9 @@
   <tr>
     <td align="center">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="assets/github-mark-white.svg" width="48" height="48" />
-        <source media="(prefers-color-scheme: light)" srcset="assets/github-mark.svg" width="48" height="48" />
-        <img src="assets/github-mark.svg" width="48" height="48" />
+        <source media="(prefers-color-scheme: dark)" srcset="assets/github-mark-white.svg" width="48" />
+        <source media="(prefers-color-scheme: light)" srcset="assets/github-mark.svg" width="48" />
+        <img src="assets/github-mark.svg" width="48" />
       </picture>
     </td>
     <td><a href="https://github.com/pxbunny/yt-smart-tv/releases">Releases</a></td>
