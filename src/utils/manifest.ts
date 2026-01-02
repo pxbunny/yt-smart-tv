@@ -1,9 +1,9 @@
-export const getExtensionName = (): string => {
+export function getExtensionName(): string {
     const { name } = browser.runtime.getManifest();
     return name;
-};
+}
 
-export const getExtensionVersion = (): string => {
+export function getExtensionVersion(): string {
     const { version } = browser.runtime.getManifest();
     return version;
-};
+}

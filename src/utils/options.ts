@@ -12,7 +12,7 @@ export interface BehaviorOptions {
 export type Options = UiOptions & BehaviorOptions;
 
 export class LazyOptions {
-    private options: Options | undefined;
+    private options?: Options;
 
     constructor() {
         browser.storage.onChanged.addListener((_, areaName) => {
@@ -46,14 +46,15 @@ export type OptionKey = keyof Options;
 
 export const optionKeys = Object.keys(defaultOptions) as OptionKey[];
 
-export const isOptionKey = (value: string): value is OptionKey =>
-    optionKeys.includes(value as OptionKey);
+export function isOptionKey(value: string): value is OptionKey {
+    return optionKeys.includes(value as OptionKey);
+}
 
-export const getOptions = async (): Promise<Options> => {
+export async function getOptions(): Promise<Options> {
     const stored = await browser.storage.sync.get(optionKeys);
     return { ...defaultOptions, ...(stored as Partial<Options>) };
-};
+}
 
-export const setOptions = async (options: Partial<Options>) => {
+export async function setOptions(options: Partial<Options>) {
     await browser.storage.sync.set(options);
-};
+}

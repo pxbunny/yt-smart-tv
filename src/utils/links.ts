@@ -1,26 +1,32 @@
-export const openYouTubeTv = async (uri = '', options: BehaviorOptions, incognito = false) => {
+export async function openYouTubeTv(uri = '', options: BehaviorOptions, incognito = false) {
     const { openInNewWindow, openInFullscreen } = options;
 
-    if (openInNewWindow) {
+    const openYouTubeTvInNewWindow = async () =>
         await browser.windows.create({
             url: getYouTubeTvUrl(uri),
             state: openInFullscreen ? 'fullscreen' : undefined,
             focused: true,
             incognito
         });
+
+    const openYouTubeTvInNewTab = async () =>
+        await browser.tabs.create({
+            url: getYouTubeTvUrl(uri),
+            active: true
+        });
+
+    if (openInNewWindow) {
+        await openYouTubeTvInNewWindow();
         return;
     }
 
-    await browser.tabs.create({
-        url: getYouTubeTvUrl(uri),
-        active: true
-    });
-};
+    await openYouTubeTvInNewTab();
+}
 
-export const openYouTube = async () => {
+export async function openYouTube() {
     await browser.tabs.create({ url: 'https://www.youtube.com/' });
-};
+}
 
-export const openOptions = async () => {
+export async function openOptions() {
     await browser.runtime.openOptionsPage();
-};
+}

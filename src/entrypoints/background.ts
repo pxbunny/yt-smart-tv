@@ -3,8 +3,8 @@ import { getUserAgentUpdateRuleOptions } from '~/dynamic-rules';
 export default defineBackground(() => {
     const lazyOptions = new LazyOptions();
 
-    browser.runtime.onInstalled.addListener(() => {
-        browser.declarativeNetRequest.updateDynamicRules(getUserAgentUpdateRuleOptions());
+    browser.runtime.onInstalled.addListener(async () => {
+        await browser.declarativeNetRequest.updateDynamicRules(getUserAgentUpdateRuleOptions());
     });
 
     browser.runtime.onMessage.addListener(async (request, sender) => {
@@ -26,7 +26,7 @@ export default defineBackground(() => {
 
             case requests.CLOSE_SMART_TV: {
                 const tabId = sender.tab?.id;
-                if (tabId) browser.tabs.remove(tabId);
+                if (tabId !== undefined) await browser.tabs.remove(tabId);
                 break;
             }
         }

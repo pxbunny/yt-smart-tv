@@ -9,10 +9,10 @@ export interface RetryOptions {
 }
 
 export interface RetryHandle {
-    cancel: () => void;
+    cancel(): void;
 }
 
-export const retryUntil = (callback: () => boolean, options: RetryOptions = {}): RetryHandle => {
+export function retryUntil(callback: () => boolean, options: RetryOptions = {}): RetryHandle {
     const {
         retryIndefinitely = false,
         timeoutMs = 5 * 60 * 1000,
@@ -29,14 +29,14 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
     let delayMs = initialDelayMs;
     let observer: MutationObserver | undefined;
 
-    const cleanup = () => {
+    const cleanup = (): void => {
         clearTimeout(timeoutId);
         observer?.disconnect();
         timeoutId = undefined;
         observer = undefined;
     };
 
-    const cancel = () => {
+    const cancel = (): void => {
         if (!active) return;
         active = false;
         cleanup();
@@ -44,7 +44,9 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
 
     const handle: RetryHandle = { cancel };
 
-    const callIfActive = (): boolean => active && callback();
+    const callIfActive = (): boolean => {
+        return active && callback();
+    };
 
     if (callIfActive()) {
         cancel();
@@ -53,7 +55,7 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
 
     const deadline = Date.now() + timeoutMs;
 
-    const scheduleNextAttempt = () => {
+    const scheduleNextAttempt = (): void => {
         if (!active) return;
 
         const currentDelayMs = delayMs;
@@ -76,7 +78,7 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
         timeoutId = setTimeout(attempt, nextDelayMs);
     };
 
-    const attempt = () => {
+    const attempt = (): void => {
         if (!active) return;
 
         if (callIfActive()) {
@@ -107,4 +109,4 @@ export const retryUntil = (callback: () => boolean, options: RetryOptions = {}):
 
     scheduleNextAttempt();
     return handle;
-};
+}

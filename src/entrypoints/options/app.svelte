@@ -6,6 +6,8 @@
   import Header from '~/components/ui/header.svelte';
   import Section from '~/components/ui/section.svelte';
 
+  const SAVE_DEBOUNCE_MS = 200;
+
   let options = $state<Options>({ ...emptyOptions });
   let hydrated = $state(false);
   let timeout: ReturnType<typeof setTimeout> | undefined;
@@ -29,7 +31,7 @@
     clearTimeout(timeout);
     timeout = setTimeout(async () => {
       await setOptions(snapshot);
-    }, 200);
+    }, SAVE_DEBOUNCE_MS);
   });
 </script>
 

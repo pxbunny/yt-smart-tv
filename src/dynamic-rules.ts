@@ -1,8 +1,11 @@
 import agents from './user-agents.json';
 
-type Options = Browser.declarativeNetRequest.UpdateRuleOptions;
+type UpdateRuleOptions = Browser.declarativeNetRequest.UpdateRuleOptions;
 
-export const getUserAgentUpdateRuleOptions = (id = 1): Options => ({
+const YOUTUBE_TV_FILTER = 'youtube.com/tv';
+const DEFAULT_USER_AGENT = agents['user-agents'].default;
+
+export const getUserAgentUpdateRuleOptions = (id = 1): UpdateRuleOptions => ({
     removeRuleIds: [id],
     addRules: [
         {
@@ -14,13 +17,13 @@ export const getUserAgentUpdateRuleOptions = (id = 1): Options => ({
                     {
                         header: 'user-agent',
                         operation: 'set',
-                        value: agents['user-agents'].default
+                        value: DEFAULT_USER_AGENT
                     }
                 ]
             },
             condition: {
                 resourceTypes: ['main_frame'],
-                urlFilter: 'youtube.com/tv'
+                urlFilter: YOUTUBE_TV_FILTER
             }
         }
     ]

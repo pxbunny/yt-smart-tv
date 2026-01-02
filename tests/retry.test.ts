@@ -2,19 +2,54 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { retryUntil } from '../src/utils/retry';
 
-class FakeMutationObserver {
+function useFakeTimersAtEpoch(): void {
+    vi.useFakeTimers();
+    vi.setSystemTime(0);
+}
+
+function runQueueMicrotaskImmediately(): void {
+    vi.stubGlobal('queueMicrotask', (fn: VoidFunction) => fn());
+}
+
+function stubMutationObserver(): { triggerMutation(): void } {
+    let triggerMutation = (): void => {
+        throw new Error('Expected MutationObserver to be created');
+    };
+
+    class CapturingMutationObserver extends FakeMutationObserver {
+        constructor(onMutate: MutationCallback) {
+            super(onMutate);
+            triggerMutation = () => this.trigger();
+        }
+    }
+
+    vi.stubGlobal(
+        'MutationObserver',
+        CapturingMutationObserver as unknown as typeof MutationObserver
+    );
+
+    return { triggerMutation: () => triggerMutation() };
+}
+
+class FakeMutationObserver implements MutationObserver {
     constructor(private readonly onMutate: MutationCallback) {}
 
-    observe() {
+    observe(target: Node, options?: MutationObserverInit): void {
+        void target;
+        void options;
         return;
     }
 
-    disconnect() {
+    disconnect(): void {
         return;
     }
 
-    trigger() {
-        this.onMutate([], this as unknown as MutationObserver);
+    takeRecords(): MutationRecord[] {
+        return [];
+    }
+
+    trigger(): void {
+        this.onMutate([], this);
     }
 }
 
@@ -35,8 +70,7 @@ describe('retryUntil', () => {
     });
 
     it('can be cancelled', () => {
-        vi.useFakeTimers();
-        vi.setSystemTime(0);
+        useFakeTimersAtEpoch();
 
         const callback = vi.fn(() => false);
 
@@ -61,8 +95,7 @@ describe('retryUntil', () => {
     });
 
     it('retries with backoff until the callback succeeds', () => {
-        vi.useFakeTimers();
-        vi.setSystemTime(0);
+        useFakeTimersAtEpoch();
 
         const callback = vi
             .fn()
@@ -95,8 +128,7 @@ describe('retryUntil', () => {
     });
 
     it('stops retrying after timeout', () => {
-        vi.useFakeTimers();
-        vi.setSystemTime(0);
+        useFakeTimersAtEpoch();
 
         const callback = vi.fn(() => false);
         retryUntil(callback, {
@@ -125,8 +157,7 @@ describe('retryUntil', () => {
     });
 
     it('retries indefinitely when retryIndefinitely is true', () => {
-        vi.useFakeTimers();
-        vi.setSystemTime(0);
+        useFakeTimersAtEpoch();
 
         const callback = vi.fn(() => false);
 
@@ -150,19 +181,8 @@ describe('retryUntil', () => {
     it('cancels the pending timer when it succeeds via MutationObserver in retryIndefinitely mode', () => {
         vi.useFakeTimers();
 
-        vi.stubGlobal('queueMicrotask', (fn: VoidFunction) => fn());
-
-        let lastObserver: MutationObserver | undefined;
-
-        vi.stubGlobal(
-            'MutationObserver',
-            class extends FakeMutationObserver {
-                constructor(onMutate: MutationCallback) {
-                    super(onMutate);
-                    lastObserver = this as unknown as MutationObserver;
-                }
-            } as unknown as typeof MutationObserver
-        );
+        runQueueMicrotaskImmediately();
+        const { triggerMutation } = stubMutationObserver();
 
         const callback = vi
             .fn()
@@ -172,14 +192,14 @@ describe('retryUntil', () => {
         retryUntil(callback, {
             retryIndefinitely: true,
             observeMutations: true,
-            observerRoot: {} as unknown as Node,
+            observerRoot: {} as Node,
             initialDelayMs: 10_000
         });
 
         expect(callback).toHaveBeenCalledTimes(1);
         expect(vi.getTimerCount()).toBe(1);
 
-        (lastObserver as unknown as FakeMutationObserver).trigger();
+        triggerMutation();
 
         expect(callback).toHaveBeenCalledTimes(2);
         expect(vi.getTimerCount()).toBe(0);
@@ -188,19 +208,8 @@ describe('retryUntil', () => {
     it('can succeed via MutationObserver without waiting for the next timer', () => {
         vi.useFakeTimers();
 
-        vi.stubGlobal('queueMicrotask', (fn: VoidFunction) => fn());
-
-        let lastObserver: MutationObserver | undefined;
-
-        vi.stubGlobal(
-            'MutationObserver',
-            class extends FakeMutationObserver {
-                constructor(onMutate: MutationCallback) {
-                    super(onMutate);
-                    lastObserver = this as unknown as MutationObserver;
-                }
-            } as unknown as typeof MutationObserver
-        );
+        runQueueMicrotaskImmediately();
+        const { triggerMutation } = stubMutationObserver();
 
         const callback = vi
             .fn()
@@ -209,14 +218,14 @@ describe('retryUntil', () => {
 
         retryUntil(callback, {
             observeMutations: true,
-            observerRoot: {} as unknown as Node,
+            observerRoot: {} as Node,
             initialDelayMs: 10_000
         });
 
         expect(callback).toHaveBeenCalledTimes(1);
         expect(vi.getTimerCount()).toBe(1);
 
-        (lastObserver as unknown as FakeMutationObserver).trigger();
+        triggerMutation();
 
         expect(callback).toHaveBeenCalledTimes(2);
         expect(vi.getTimerCount()).toBe(0);

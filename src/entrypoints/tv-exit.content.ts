@@ -6,23 +6,6 @@ export default defineContentScript({
     matches: ['https://*.youtube.com/tv*'],
     runAt: 'document_end',
     main() {
-        const handleExit = (overlay: Element) =>
-            retryUntil(
-                () => {
-                    if (!isExitScreenDisplayed(overlay)) return false;
-
-                    sendExitRequestOnce();
-                    return true;
-                },
-                {
-                    retryIndefinitely: true,
-                    initialDelayMs: 3_000,
-                    maxDelayMs: 3_000,
-                    backoffFactor: 1,
-                    observerRoot: overlay
-                }
-            );
-
         retryUntil(
             () => {
                 const overlay = document.querySelector(OVERLAY_SELECTOR);
@@ -41,18 +24,36 @@ export default defineContentScript({
 
 let requestAlreadySent = false;
 
-const sendExitRequestOnce = () => {
+function handleExit(overlay: Element): void {
+    retryUntil(
+        () => {
+            if (!isExitScreenDisplayed(overlay)) return false;
+
+            sendExitRequestOnce();
+            return true;
+        },
+        {
+            retryIndefinitely: true,
+            initialDelayMs: 3_000,
+            maxDelayMs: 3_000,
+            backoffFactor: 1,
+            observerRoot: overlay
+        }
+    );
+}
+
+function sendExitRequestOnce(): void {
     if (requestAlreadySent) return;
 
     requestAlreadySent = true;
     browser.runtime.sendMessage(requests.CLOSE_SMART_TV);
-};
+}
 
-const isExitScreenDisplayed = (container: Element) => {
+function isExitScreenDisplayed(container: Element): boolean {
     const headers = container.querySelectorAll(TEXT_ELEMENT_SELECTOR);
 
     const expectedHeaderContent = EXIT_HEADER_CONTENT.toLowerCase();
     return Array.from(headers).some(
         header => header.textContent?.trim().toLowerCase() === expectedHeaderContent
     );
-};
+}

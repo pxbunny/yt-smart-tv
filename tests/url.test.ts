@@ -9,8 +9,9 @@ import {
 } from '../src/utils/url';
 
 describe('tryParseUrl', () => {
-    it('returns null for undefined', () => {
+    it('returns null for missing input', () => {
         expect(tryParseUrl(undefined)).toBeNull();
+        expect(tryParseUrl('')).toBeNull();
     });
 
     it('returns null for invalid URL', () => {
@@ -19,22 +20,34 @@ describe('tryParseUrl', () => {
 
     it('parses valid URL', () => {
         const url = tryParseUrl('https://www.youtube.com/watch?v=abc');
-        expect(url).not.toBeNull();
+        expect(url).toBeInstanceOf(URL);
         expect(url?.hostname).toBe('www.youtube.com');
     });
 });
 
 describe('isYouTubeUrl', () => {
     it('accepts https://youtube.com and subdomains', () => {
-        expect(isYouTubeUrl(new URL('https://youtube.com/watch?v=1'))).toBe(true);
-        expect(isYouTubeUrl(new URL('https://www.youtube.com/watch?v=1'))).toBe(true);
-        expect(isYouTubeUrl(new URL('https://m.youtube.com/watch?v=1'))).toBe(true);
+        const cases = [
+            'https://youtube.com/watch?v=1',
+            'https://www.youtube.com/watch?v=1',
+            'https://m.youtube.com/watch?v=1'
+        ];
+
+        for (const url of cases) {
+            expect(isYouTubeUrl(new URL(url))).toBe(true);
+        }
     });
 
     it('rejects non-https or non-youtube hosts', () => {
-        expect(isYouTubeUrl(new URL('http://www.youtube.com/watch?v=1'))).toBe(false);
-        expect(isYouTubeUrl(new URL('https://example.com'))).toBe(false);
-        expect(isYouTubeUrl(new URL('https://evil.youtube.com.evil.com'))).toBe(false);
+        const cases = [
+            'http://www.youtube.com/watch?v=1',
+            'https://example.com',
+            'https://evil.youtube.com.evil.com'
+        ];
+
+        for (const url of cases) {
+            expect(isYouTubeUrl(new URL(url))).toBe(false);
+        }
     });
 });
 
@@ -55,31 +68,25 @@ describe('getYouTubeRelativeUri', () => {
 });
 
 describe('getYouTubeTvUrl', () => {
-    it('builds TV URL for empty uri', () => {
-        expect(getYouTubeTvUrl('')).toBe('https://www.youtube.com/tv');
-        expect(getYouTubeTvUrl('   ')).toBe('https://www.youtube.com/tv');
-        expect(getYouTubeTvUrl('/')).toBe('https://www.youtube.com/tv');
-    });
+    const cases: [uri: string, expected: string][] = [
+        ['', 'https://www.youtube.com/tv'],
+        ['   ', 'https://www.youtube.com/tv'],
+        ['/', 'https://www.youtube.com/tv'],
+        ['/watch?v=abc', 'https://www.youtube.com/tv/watch?v=abc'],
+        ['watch?v=abc', 'https://www.youtube.com/tv/watch?v=abc'],
+        ['?v=abc', 'https://www.youtube.com/tv?v=abc'],
+        ['/tv/watch?v=abc', 'https://www.youtube.com/tv/watch?v=abc'],
+        ['tv/watch?v=abc', 'https://www.youtube.com/tv/watch?v=abc']
+    ];
 
-    it('builds TV URL for watch path starting with slash', () => {
-        expect(getYouTubeTvUrl('/watch?v=abc')).toBe('https://www.youtube.com/tv/watch?v=abc');
-    });
-
-    it('builds TV URL for query-only uri', () => {
-        expect(getYouTubeTvUrl('?v=abc')).toBe('https://www.youtube.com/tv?v=abc');
-    });
-
-    it('builds TV URL for uri without leading slash', () => {
-        expect(getYouTubeTvUrl('watch?v=abc')).toBe('https://www.youtube.com/tv/watch?v=abc');
-    });
-
-    it('does not double-prefix /tv when already in TV mode', () => {
-        expect(getYouTubeTvUrl('/tv/watch?v=abc')).toBe('https://www.youtube.com/tv/watch?v=abc');
-        expect(getYouTubeTvUrl('tv/watch?v=abc')).toBe('https://www.youtube.com/tv/watch?v=abc');
-    });
+    for (const [uri, expected] of cases) {
+        it(`builds a TV URL for "${uri}"`, () => {
+            expect(getYouTubeTvUrl(uri)).toBe(expected);
+        });
+    }
 });
 
-describe('getUrlWithTimestampParam', () => {
+describe('getUrlWithTimestamp', () => {
     it('sets the t param to floored seconds', () => {
         expect(getUrlWithTimestamp('https://www.youtube.com/watch?v=abc', 10.9)).toBe(
             'https://www.youtube.com/watch?v=abc&t=10'

@@ -28,9 +28,14 @@ export default defineContentScript({
             for (const [key, change] of Object.entries(changes)) {
                 const { newValue } = change;
 
-                if (!isOptionKey(key) || !supportedOptionKeys.has(key)) continue;
+                const shouldOptionBeSkipped =
+                    !isOptionKey(key) ||
+                    !supportedOptionKeys.has(key) ||
+                    typeof newValue !== 'boolean';
 
-                handleOptionChange(key, newValue as boolean);
+                if (shouldOptionBeSkipped) continue;
+
+                handleOptionChange(key, newValue);
             }
         });
 
@@ -38,7 +43,15 @@ export default defineContentScript({
     }
 });
 
-const handleOptionChange = (key: OptionKey, value: boolean) => {
+async function initialize(): Promise<void> {
+    const { showGuideButton, showMiniGuideButton, showPlayerButton } = await getOptions();
+
+    if (showGuideButton) startGuideButton();
+    if (showMiniGuideButton) startMiniGuideButton();
+    if (showPlayerButton) startPlayerButton();
+}
+
+function handleOptionChange(key: OptionKey, value: boolean): void {
     switch (key) {
         case 'showGuideButton':
             if (value) startGuideButton();
@@ -53,17 +66,9 @@ const handleOptionChange = (key: OptionKey, value: boolean) => {
             else stopPlayerButton();
             break;
     }
-};
+}
 
-const initialize = async () => {
-    const { showGuideButton, showMiniGuideButton, showPlayerButton } = await getOptions();
-
-    if (showGuideButton) startGuideButton();
-    if (showMiniGuideButton) startMiniGuideButton();
-    if (showPlayerButton) startPlayerButton();
-};
-
-const startGuideButton = () => {
+function startGuideButton(): void {
     guideButtonRetry?.cancel();
     guideButtonRetry = retryUntil(
         () => {
@@ -76,9 +81,9 @@ const startGuideButton = () => {
             observerRoot: document.querySelector('tp-yt-app-drawer') ?? document.body
         }
     );
-};
+}
 
-const startMiniGuideButton = () => {
+function startMiniGuideButton(): void {
     miniGuideButtonRetry?.cancel();
     miniGuideButtonRetry = retryUntil(
         () => {
@@ -91,36 +96,38 @@ const startMiniGuideButton = () => {
             observerRoot: document.querySelector('ytd-mini-guide-renderer') ?? document.body
         }
     );
-};
+}
 
-const startPlayerButton = () => {
+function startPlayerButton(): void {
     playerButtonRetry?.cancel();
     playerButtonRetry = retryUntil(addSmartTvPlayerButton, {
         observerRoot: document.querySelector('#player') ?? document.body
     });
-};
+}
 
-const stopGuideButton = () => {
+function stopGuideButton(): void {
     guideButtonRetry?.cancel();
     guideButtonRetry = undefined;
     removeById(SMART_TV_BUTTON_ID);
-};
+}
 
-const stopMiniGuideButton = () => {
+function stopMiniGuideButton(): void {
     miniGuideButtonRetry?.cancel();
     miniGuideButtonRetry = undefined;
     removeById(SMART_TV_MINI_BUTTON_ID);
-};
+}
 
-const stopPlayerButton = () => {
+function stopPlayerButton(): void {
     playerButtonRetry?.cancel();
     playerButtonRetry = undefined;
     removeById(SMART_TV_PLAYER_BUTTON_ID);
-};
+}
 
-const removeById = (id: string) => document.getElementById(id)?.remove();
+function removeById(id: string): void {
+    document.getElementById(id)?.remove();
+}
 
-const addSmartTvButton = (buttonId: string, target: Element, mini = false): boolean => {
+function addSmartTvButton(buttonId: string, target: Element, mini = false): boolean {
     if (document.getElementById(buttonId)) return true;
     if (target.children.length < 1) return false;
 
@@ -137,9 +144,9 @@ const addSmartTvButton = (buttonId: string, target: Element, mini = false): bool
     });
 
     return true;
-};
+}
 
-const addSmartTvPlayerButton = (): boolean => {
+function addSmartTvPlayerButton(): boolean {
     if (document.getElementById(SMART_TV_PLAYER_BUTTON_ID)) return true;
 
     const target = document.querySelector('.ytp-right-controls');
@@ -147,7 +154,7 @@ const addSmartTvPlayerButton = (): boolean => {
 
     if (!target) return false;
 
-    const handleClick = () => {
+    const handleClick = (): void => {
         const video = document.querySelector('video');
 
         video?.pause();
@@ -169,4 +176,4 @@ const addSmartTvPlayerButton = (): boolean => {
     });
 
     return true;
-};
+}
