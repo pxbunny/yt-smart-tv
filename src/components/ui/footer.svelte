@@ -1,9 +1,3 @@
-<script lang="ts">
-  import { getExtensionVersion } from '~/utils/manifest';
-
-  const version = getExtensionVersion();
-</script>
-
 <footer class="footer">
   <nav class="links" aria-label="Project links">
     <a
@@ -30,7 +24,7 @@
       Feature request
     </a>
   </nav>
-  <span class="version">v{version}</span>
+  <span class="version">v{getExtensionVersion()}</span>
 </footer>
 
 <style lang="scss">
