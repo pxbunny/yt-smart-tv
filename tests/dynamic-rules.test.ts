@@ -2,15 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { getUserAgentUpdateRuleOptions } from '../src/dynamic-rules';
 import agents from '../src/user-agents.json';
-
-function assertNonNullOrUndefined<T>(
-  value: T | null | undefined,
-  message: string
-): asserts value is T {
-  if (value == null || value === undefined) {
-    throw new Error(message);
-  }
-}
+import { assertNonNullOrUndefined } from './utils';
 
 describe('dynamic-rules', () => {
   it('builds a DNR update options object for the given id', () => {
