@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an improvement for the YouTube Smart TV extension
+about: Suggest an improvement for the extension
 title: '[Feature]: '
 labels: ['enhancement']
 assignees: []

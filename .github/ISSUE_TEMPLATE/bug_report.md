@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a bug in the YouTube Smart TV extension
+about: Report a bug in the extension
 title: '[Bug]: '
 labels: ['bug']
 assignees: []
