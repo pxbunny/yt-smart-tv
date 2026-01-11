@@ -1,7 +1,7 @@
 <footer class="footer">
   <nav class="links" aria-label="Project links">
     <a
-      href="https://github.com/pxbunny/yt-smart-tv"
+      href="https://github.com/rczajkadev/yt-smart-tv"
       target="_blank"
       rel="noreferrer"
     >
@@ -9,7 +9,7 @@
     </a>
     <span class="sep" aria-hidden="true">·</span>
     <a
-      href="https://github.com/pxbunny/yt-smart-tv/issues/new?template=bug_report.md"
+      href="https://github.com/rczajkadev/yt-smart-tv/issues/new?template=bug_report.md"
       target="_blank"
       rel="noreferrer"
     >
@@ -17,7 +17,7 @@
     </a>
     <span class="sep" aria-hidden="true">·</span>
     <a
-      href="https://github.com/pxbunny/yt-smart-tv/issues/new?template=feature_request.md"
+      href="https://github.com/rczajkadev/yt-smart-tv/issues/new?template=feature_request.md"
       target="_blank"
       rel="noreferrer"
     >
