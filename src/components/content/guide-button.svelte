@@ -43,7 +43,7 @@
 
     &:hover,
     &:focus {
-      background-color: var(--yt-spec-badge-chip-background);
+      background-color: var(--yt-spec-additive-background);
       outline: none;
     }
 
